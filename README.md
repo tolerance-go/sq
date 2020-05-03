@@ -12,6 +12,13 @@
 
 ```bash
 yarn dev
+yarn dev:watch // 同时监听文件，自动执行 yarn generate
+```
+
+侧边栏导航根据文档结构自动生成，执行命令如下
+
+```bash
+yarn generate
 ```
 
 ## Helper
