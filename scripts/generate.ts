@@ -7,6 +7,8 @@ const cwd = process.cwd();
 const PathsMap = {
   docs: path.join(cwd, 'docs'),
   config: path.join(cwd, 'docs/.vuepress/config.js'),
+  nav: path.join(cwd, 'docs/.vuepress/nav.json'),
+  sidebar: path.join(cwd, 'docs/.vuepress/sidebar.json'),
 };
 
 const NamesMap = {};
@@ -142,24 +144,12 @@ const generate = (parsedTree: ParsedTreeNode) => {
     .filter(Boolean)
     .reduce((a, b) => ({ ...a, ...b }));
 
-  let content = fs.readFileSync(PathsMap.config, { encoding: 'utf8' });
-  content = content.replace(
-    /\/\/ generate-sidebar-start(\n|.)*\/\/ generate-sidebar-end/,
-    () => {
-      return `// generate-sidebar-start
-    sidebar: ${JSON.stringify(sidebarContent)},
-    // generate-sidebar-end`;
-    },
-  );
-  content = content.replace(
-    /\/\/ generate-nav-start(\n|.)*\/\/ generate-nav-end/,
-    () => {
-      return `// generate-nav-start
-    nav: ${JSON.stringify(navContent)},
-    // generate-nav-end`;
-    },
-  );
-  fs.writeFileSync(PathsMap.config, content);
+  fs.writeFileSync(PathsMap.sidebar, JSON.stringify(sidebarContent), {
+    encoding: 'utf8',
+  });
+  fs.writeFileSync(PathsMap.nav, JSON.stringify(navContent), {
+    encoding: 'utf8',
+  });
 };
 
 const tree = load(PathsMap.docs);
