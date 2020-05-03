@@ -1,0 +1,68 @@
+version: 2.1
+
+aliases:
+  - &restore_yarn_cache
+    restore_cache:
+      name: Restore Node_modules Cache
+      keys:
+        - yarn-packages-{{ checksum "yarn.lock" }}
+        - yarn-packages-
+  - &run_yarn
+    run:
+      name: Install Packages
+      command: yarn --frozen-lockfile
+
+jobs:
+  setup:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - *restore_yarn_cache
+      - *run_yarn
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+  test:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - *restore_yarn_cache
+      - *run_yarn
+      - run:
+          name: Test
+          command: yarn test
+
+  trigger_update:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "46:71:0e:84:a2:5c:18:a1:a6:6f:17:a1:29:04:19:ea"
+      - run: echo $REMOTE_HOSTKEY >> ~/.ssh/known_hosts
+      - run:
+          name: Deploy
+          command: |
+            ssh $REMOTE_USERNAME@$REMOTE_IP "cd $REMOTE_KL_PATH && git checkout master && git checkout . && git pull origin master -f && yarn upgrade --frozen-lockfile && yarn clean && yarn build:all && pm2 restart ./dist-server/service/index.js"
+
+workflows:
+  version: 2.1
+  default:
+    jobs:
+      - setup
+      - test:
+          requires:
+            - setup
+      - trigger_update:
+          context: SERVER_TOKEN
+          requires:
+            - test
+          filters:
+            branches:
+              only: master

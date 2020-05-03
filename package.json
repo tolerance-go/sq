@@ -1,0 +1,89 @@
+{
+  "private": true,
+  "name": "sq",
+  "description": "Build your own knowledge system with structured problems",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "dev": "vuepress dev docs",
+    "dev:watch": "yarn generate && ts-node ./scripts/vuepress-dev",
+    "dev:visual": "parcel serve -d .parcel docs/**/*.html",
+    "dev:server": "nodemon --watch 'service/**/*' -e ts --exec 'ts-node' --project tsconfig.server.json ./service/index.ts",
+    "dev:server:watch": "yarn build:server:apidoc && ts-node ./scripts/server-dev",
+    "build": "vuepress build -d dist docs",
+    "build:visual": "parcel build -d dist-visual docs/**/*.html",
+    "build:server": "tsc --build tsconfig.server.json",
+    "build:server:apidoc": "swagger-jsdoc docs/**/*.service.ts -d swaggerDef.js -o public/swagger.json",
+    "build:all": "yarn generate && yarn build:server:apidoc && yarn build && yarn build:visual && yarn build:server",
+    "generate": "ts-node ./scripts/generate.ts",
+    "publish": "lerna-changelog",
+    "pre-commit": "yarn test && yarn generate && yarn build:server:apidoc",
+    "clean": "rimraf dist dist-visual dist-server"
+  },
+  "lint-staged": {
+    "*.{md,json}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{ts?(x),js}": [
+      "eslint --fix",
+      "prettier --parser=typescript --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn pre-commit",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "changelog": {
+    "labels": {
+      "enhancement": ":rocket: Enhancement",
+      "bug": ":bug: Bug Fix",
+      "documentation": ":book: Documentation",
+      "dependency": ":deciduous_tree: Dependency",
+      "chore": ":turtle: Chore"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "7.8.4",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "^7.9.0",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@types/jest": "^25.2.1",
+    "@types/koa": "^2.11.3",
+    "@types/koa-router": "^7.4.0",
+    "@types/react-dom": "^16.9.6",
+    "@types/styled-components": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "babel-jest": "^25.3.0",
+    "babel-loader": "^8.1.0",
+    "chokidar-cli": "^2.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "husky": "^4.2.5",
+    "jest": "^25.3.0",
+    "koa": "^2.11.0",
+    "koa-router": "^8.0.8",
+    "koa-static": "^5.0.0",
+    "koa2-swagger-ui": "^3.0.0",
+    "lerna-changelog": "^1.0.1",
+    "less": "^3.11.1",
+    "lint-staged": "^10.1.0",
+    "nodemon": "^2.0.3",
+    "parcel": "^1.12.4",
+    "prettier": "^2.0.4",
+    "rimraf": "^3.0.2",
+    "swagger-jsdoc": "^4.0.0",
+    "ts-node": "^8.10.0",
+    "typescript": "^3.8.3"
+  }
+}
