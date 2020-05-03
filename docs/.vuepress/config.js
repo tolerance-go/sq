@@ -1,6 +1,6 @@
 module.exports = {
   title: 'SQ',
-  description: 'share something here',
+  description: 'Build your own knowledge system with structured problems',
   themeConfig: {
     sidebarDepth: 6,
     repo: 'tolerance-go/sq',

@@ -2,7 +2,7 @@
 
 [HOME](http://47.92.70.143)
 
-Build your own knowledge system with structured problems
+用结构化的问题建立自己的领域知识体系，不断的提高自身的认知水平和解决问题的能力
 
 ## Helper
 
