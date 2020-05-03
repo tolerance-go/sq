@@ -133,10 +133,17 @@ const generate = (parsedTree: ParsedTreeNode) => {
   const sidebarContent = parsedTree.children
     .map((item) => {
       if (typeof item === 'string') return;
-      const [readme, ...others] = item.children;
-      if (typeof readme !== 'string') {
+      const readmeIndex = item.children.findIndex(
+        (item) => typeof item === 'string',
+      );
+
+      if (readmeIndex === -1) {
         throw new Error(`${item.title} 必须有一个 README.md`);
       }
+      const readme = item.children[readmeIndex] as string;
+      const others = item.children.filter(
+        (item, index) => readmeIndex !== index,
+      );
       return {
         [readme]: others,
       };
