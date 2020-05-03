@@ -61,6 +61,8 @@
     "@types/styled-components": "^5.1.0",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
+    "@vuepress/plugin-back-to-top": "^1.4.1",
+    "@vuepress/plugin-medium-zoom": "^1.4.1",
     "babel-jest": "^25.3.0",
     "babel-loader": "^8.1.0",
     "chokidar-cli": "^2.1.0",

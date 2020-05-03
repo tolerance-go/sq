@@ -16,7 +16,7 @@
 
 7. 数据存储。这是持久层。浏览器需要在硬盘上保存各种数据，例如 Cookie。新的 HTML 规范 (HTML5) 定义了“网络数据库”，这是一个完整（但是轻便）的浏览器内数据库。
 
-<img src="./index.assets/main-components.png">
+![main-components.png](./index.assets/main-components.png)
 
 和大多数浏览器不同，Chrome 浏览器的每个标签页都分别对应一个呈现引擎实例。每个标签页都是一个独立的进程。
 
@@ -32,7 +32,7 @@ WebKit 是一种开放源代码呈现引擎，起初用于 Linux 平台，随后
 
 然后进行如下所示的基本流程：
 
-<img src="./index.assets/base-flow.png">
+![base-flow.png](./index.assets/base-flow.png)
 
 呈现引擎将开始解析 HTML 文档，并将各标记逐个转化成“内容树”上的 DOM 节点。同时也会解析外部 CSS 文件以及样式元素中的样式数据。HTML 中这些带有视觉指令的样式信息将用于创建另一个树结构：呈现树。
 
@@ -42,9 +42,9 @@ WebKit 是一种开放源代码呈现引擎，起初用于 Linux 平台，随后
 
 详细流程示例：
 
-<img src="./index.assets/webkit-flow.png">
+![webkit-flow.png](./index.assets/webkit-flow.png)
 
-<img src="./index.assets/mozilla-flow.jpg">
+![mozilla-flow.jpg](./index.assets/mozilla-flow.jpg)
 
 在这里，需要注意的是不同呈现引擎在主流程中会稍有不同，例如 CSS 样式表的解析时机，Webkit 内核下，HTML 和 CSS 文件的解析是同步的，而 Geoko 内核下，CSS 文件需要等到 HTML 文件解析成内容 Sink 后才进行解析。
 
@@ -58,7 +58,7 @@ WebKit 是一种开放源代码呈现引擎，起初用于 Linux 平台，随后
 
 解析的过程可以分成两个子过程：词法分析和语法分析。
 
-<img src="./index.assets/parse-progress.png">
+![parse-progress.png](./index.assets/parse-progress.png)
 
 解析器通常将解析工作分给以下两个组件来处理：词法分析器（有时也称为标记生成器），负责将输入内容分解成一个个有效标记；而解析器负责根据语言的语法规则分析文档的结构，从而构建解析树。词法分析器知道如何将无关的字符（比如空格和换行符）分离出来。
 
@@ -78,7 +78,7 @@ WebKit 是一种开放源代码呈现引擎，起初用于 Linux 平台，随后
 
 很多时候，解析树还不是最终产品。解析通常是在翻译过程中使用的，而翻译是指将输入文档转换成另一种格式。编译就是这样一个例子。编译器可将源代码编译成机器代码，具体过程是首先将源代码解析成解析树，然后将解析树翻译成机器代码文档。
 
-<img src="./index.assets/translation.png">
+![translation.png](./index.assets/translation.png)
 
 #### 词汇和语法的正式定义
 
@@ -128,19 +128,19 @@ HTML 无法用常规的自上而下或自下而上的解析器进行解析。
 
 标记生成器识别标记，传递给树构造器，然后接受下一个字符以识别下一个标记；如此反复直到输入的结束。
 
-<img src="./index.assets/html-parse.png">
+![html-parse.png](./index.assets/html-parse.png)
 
 #### 标记化算法
 
 使用到了 `状态机` 算法
 
-<img src="./index.assets/tag-al.png">
+![tag-al.png](./index.assets/tag-al.png)
 
 #### 树构建算法
 
 同样使用到了 `状态机` 算法
 
-<img src="./index.assets/tree-build.gif">
+![tree-build.gif](./index.assets/tree-build.gif)
 
 #### 解析结束后的操作
 
@@ -180,7 +180,7 @@ HTML5 规范定义了一部分这样的要求。WebKit 在 HTML 解析器类的�
 
 WebKit 使用 Flex 和 Bison 解析器生成器，通过 CSS 语法文件自动创建解析器。正如我们之前在解析器简介中所说，Bison 会创建自下而上的移位归约解析器。Firefox 使用的是人工编写的自上而下的解析器。这两种解析器都会将 CSS 文件解析成 StyleSheet 对象，且每个对象都包含 CSS 规则。CSS 规则对象则包含选择器和声明对象，以及其他与 CSS 语法对应的对象。
 
-<img src="./index.assets/css-parse.png">
+![css-parse.png](./index.assets/css-parse.png)
 
 ### 处理脚本和样式表的顺序
 
@@ -273,7 +273,7 @@ RenderObject* RenderObject::createObject(Node* node, RenderStyle* style)
 
   浮动定位和绝对定位的元素就是这样，它们处于正常的流程之外，放置在树中的其他地方，并映射到真正的框架，而放在原位的是占位框架。
 
-<img src="./index.assets/render-dom-tree.png">
+![render-dom-tree.png](./index.assets/render-dom-tree.png)
 
 ### 构建呈现树的流程
 
@@ -409,7 +409,7 @@ HTML 采用基于流的布局模型，这意味着大多数情况下只要一次
 
 布局可以采用增量方式，也就是只对 dirty 呈现器进行布局（这样可能存在需要进行额外布局的弊端）。当呈现器为 dirty 时，会异步触发增量布局。例如，当来自网络的额外内容添加到 DOM 树之后，新的呈现器附加到了呈现树中。
 
-<img src="./index.assets/reflow.png">
+![reflow.png](./index.assets/reflow.png)
 
 ### 异步布局和同步布局
 
@@ -540,7 +540,7 @@ Firefox 对此过程进行了优化，也就是不添加隐藏的元素，例如
 
 CSS 框模型描述的是针对文档树中的元素而生成，并根据可视化格式模型进行布局的矩形框。每个框都有一个内容区域（例如文本、图片等），还有可选的周围补白、边框和边距区域。
 
-<img src="./index.assets/box.jpg">
+![box.jpg](./index.assets/box.jpg)
 
 所有元素都有一个“display”属性，决定了它们所对应生成的框类型。示例：
 
@@ -582,19 +582,19 @@ static 定位无需定义位置，而是使用默认定位。对于其他方案�
 
 block 框：形成一个 block，在浏览器窗口中拥有其自己的矩形区域。
 
-<img src="./index.assets/block.png">
+![block.png](./index.assets/block.png)
 
 inline 框：没有自己的 block，但是位于容器 block 内。
 
-<img src="./index.assets/inline.png">
+![inline.png](./index.assets/inline.png)
 
 block 采用的是一个接一个的垂直格式，而 inline 采用的是水平格式。
 
-<img src="./index.assets/block+inline.png">
+![block+inline.png](./index.assets/block+inline.png)
 
 inline 框放置在行中或“行框”中。这些行至少和最高的框一样高，还可以更高，当框根据“底线”对齐时，这意味着元素的底部需要根据其他框中非底部的位置对齐。如果容器的宽度不够，inline 元素就会分为多行放置。在段落中经常发生这种情况。
 
-<img src="./index.assets/line.png">
+![line.png](./index.assets/line.png)
 
 ### 定位
 
@@ -602,7 +602,7 @@ inline 框放置在行中或“行框”中。这些行至少和最高的框一�
 
 相对定位：先按照普通方式定位，然后根据所需偏移量进行移动。
 
-<img src="./index.assets/relative.png">
+![relative.png](./index.assets/relative.png)
 
 #### 浮动
 
@@ -617,13 +617,13 @@ inline 框放置在行中或“行框”中。这些行至少和最高的框一�
 
 显示效果如下：
 
-<img src="./index.assets/float.png">
+![float.png](./index.assets/float.png)
 
 #### 绝对定位和固定定位
 
 这种布局是准确定义的，与普通流无关。元素不参与普通流。尺寸是相对于容器而言的。在固定定位中，容器就是可视区域。
 
-<img src="./index.assets/fixed.png">
+![fixed.png](./index.assets/fixed.png)
 
 请注意，即使在文档滚动时，固定框也不会移动。
 
@@ -652,7 +652,7 @@ inline 框放置在行中或“行框”中。这些行至少和最高的框一�
  </p>
 ```
 
-<img src="./index.assets/zindex.png">
+![zindex.png](./index.assets/zindex.png)
 
 虽然红色 div 在标记中的位置比绿色 div 靠前（按理应该在常规流程中优先绘制），但是 z-index 属性的优先级更高，因此它移动到了根框所保持的堆栈中更靠前的位置。
 

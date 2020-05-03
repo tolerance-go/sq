@@ -2,7 +2,7 @@
 
 ## 关系概括
 
-<img src="./index.assets/relation.png">
+![relation.png](./index.assets/relation.png)
 
 - Mozjs 是 SpiderMonley 的具体实现方式。
 - Chrome 在 Chromium 上新增了一些 Google 相关功能。

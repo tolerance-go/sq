@@ -1,3 +1,3 @@
 # 前端
 
-<img src="/fe.jpg">
+![fe.jpg](/fe.jpg)

@@ -6,11 +6,11 @@ DOM(文档对象模型)结构是一个树型结构，当一个 HTML 元素产生
 
 事件对象的 path 属性，既该对象的传播路径，`path[0]` 为目标元素，最外层为 window 对象
 
-<img src="./index.assets/path.png">
+![path.png](./index.assets/path.png)
 
 ### 事件创建
 
-<img src="./index.assets/event-create.png">
+![event-create.png](./index.assets/event-create.png)
 
 上图展示了从原始的 msg 转化成了 W3C 标准的 MouseEvent 的过程。Blink 的消息处理引擎把 msg 转化成了 WebInputEvent，这个 event 能够直接静态转化成可读的 WebMouseEvent，也就是事件在底层的时候已经被封装成带有相关数据且可读的事件了，上层再把它这些数据转化成 W3C 规定格式的 MouseEvent。
 
@@ -20,7 +20,7 @@ MouseEventManager 里在 dispatchEvent 的时候，会初始化 EventPath
 
 IE 最开始实现实现事件流的方式：冒泡事件(event bubbling)，Netscape 提出了另外一种事件流方式：事件捕获(event capturing)，不同的浏览器实现上有一些差别，用起来就有些繁琐。幸好现代浏览器都实现了 W3C 制定的"DOM2 级事件 addEventListener"，"DOM2 级事件"把事件流分为三个阶段：捕获阶段、目标阶段、冒泡阶段。
 
-<img src="./index.assets/event.png">
+![event.png](./index.assets/event.png)
 
 - 捕获
 
@@ -38,11 +38,11 @@ IE 最开始实现实现事件流的方式：冒泡事件(event bubbling)，Nets
 
 ### 事件注册
 
-<img src="./index.assets/event-target.png">
+![event-target.png](./index.assets/event-target.png)
 
 在 Node 类组合了一个 `EventTargetDataMap`，这是一个哈希 map，并且它是静态成员变量。它的 key 值是当前结点 Node 实例的指针，value 值是事件名称和对应的 listeners
 
-<img src="./index.assets/event-target-data-map.png">
+![event-target-data-map.png](./index.assets/event-target-data-map.png)
 
 每个 value，都是一个 vector，元素为 eventType:handlers 的 pair，记录了当前节点注册的所有事件类型对应的事件处理函数
 
