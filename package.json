@@ -84,6 +84,7 @@
     "rimraf": "^3.0.2",
     "swagger-jsdoc": "^4.0.0",
     "ts-node": "^8.10.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "vuepress": "^1.4.1"
   }
 }
