@@ -12,7 +12,7 @@
     "dev:server": "nodemon --watch 'service/**/*' -e ts --exec 'ts-node' --project tsconfig.server.json ./service/index.ts",
     "dev:server:watch": "yarn build:server:apidoc && ts-node ./scripts/server-dev",
     "build": "vuepress build -d dist docs",
-    "build:visual": "parcel build -d dist-visual docs/**/*.html",
+    "build:visual": "parcel build -d dist-visual --public-url /visual/ docs/**/*.html",
     "build:server": "tsc --build tsconfig.server.json",
     "build:server:apidoc": "swagger-jsdoc docs/**/*.service.ts -d swaggerDef.js -o public/swagger.json",
     "build:all": "yarn generate && yarn build:server:apidoc && yarn build && yarn build:visual && yarn build:server",
