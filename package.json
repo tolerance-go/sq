@@ -21,6 +21,18 @@
     "pre-commit": "yarn test && yarn generate && yarn build:server:apidoc",
     "clean": "rimraf dist dist-visual dist-server"
   },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "lint-staged": {
     "*.{md,json}": [
       "prettier --write",
