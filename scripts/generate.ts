@@ -122,7 +122,13 @@ const generate = (parsedTree: ParsedTreeNode) => {
   const navContent = parsedTree.children
     .map((item) => {
       if (typeof item === 'string') return;
-      const [readme] = item.children;
+      const readmeIndex = item.children.findIndex(
+        (item) => typeof item === 'string',
+      );
+      if (readmeIndex === -1) {
+        throw new Error(`${item.title} 必须有一个 README.md`);
+      }
+      const readme = item.children[readmeIndex]
       return {
         text: item.title,
         link: readme,

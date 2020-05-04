@@ -1,6 +1,4 @@
-# 函数执行上下文是什么
-
-## 执行上下文是什么
+# 执行上下文是什么
 
 执行上下文是当前 JavaScript 代码被解析和执行时所在环境的抽象概念
 
@@ -18,20 +16,14 @@
 
   指的是运行在 eval 函数中的代码，很少用而且不建议使用
 
-## 创建执行上下文经历的阶段有哪些
+### 执行上下文包含哪些属性
 
-分为 2 个阶段：
+1. this 值
 
-1. 创建阶段
-2. 执行阶段
+2. 环境对象
 
-### 创建阶段做的事情有哪些
-
-1. 确定 this 的值，也被称为 This Binding。
-
-2. LexicalEnvironment（词法环境） 组件被创建。
-
-3. VariableEnvironment（变量环境） 组件被创建。
+   - LexicalEnvironment（词法环境）
+   - VariableEnvironment（变量环境）
 
 伪代码如下：
 
@@ -43,21 +35,13 @@ ExecutionContext = {
 }
 ```
 
-### This Binding 在不同上下文中 this 的值有什么不同
-
-- 全局执行上下文中，this 的值指向全局对象，在浏览器中 this 的值指向 window 对象，而在 nodejs 中指向这个文件的 module 对象。
-
-- 函数执行上下文中，this 的值取决于函数的调用方式。具体有：默认绑定、隐式绑定、显式绑定（硬绑定）、new 绑定、箭头函数。
-
-### 词法环境（Lexical Environment）是什么
-
 #### 词法环境有哪些组成部分
 
-1. 环境记录
+1. 环境记录 - 变量对象(Variable object，VO)
 
    存储变量和函数声明的实际位置
 
-2. 对外部环境的引用
+2. 对外部环境的引用 - 作用域链(Scope chain)
 
    可以访问其外部词法环境
 
@@ -73,11 +57,11 @@ GlobalExectionContext = {  // 全局执行上下文
 }
 ```
 
-#### 词法环境有哪些类型
+#### 词法环境对象有哪些类型
 
 1. 全局环境
 
-   是一个没有外部环境的词法环境，其外部环境引用为 null。拥有一个全局对象（window 对象）和语言预设的全局方法和属性（例如数组方法）以及任何用户自定义的全局变量，this 的值指向这个全局对象。
+   是一个没有外部环境的词法环境，其外部环境引用为 null。拥有一个全局对象（window 对象）：全局对象是预定义的对象，作为 JavaScript 的全局函数和全局属性的占位符。通过使用全局对象，可以访问所有其他所有预定义的对象、函数和属性。this 的值指向这个全局对象。
 
 2. 函数环境
 
@@ -184,56 +168,6 @@ FunctionExectionContext = {
 ```
 
 可以看到，用 var 声明的变量，其位置处于 `变量环境记录` 中，而非 var 的变量及函数声明，其位置处于 `词法环境记录` 中
-
-### 变量提升的原因是什么
-
-在执行上下文创建阶段，var 声明的变量会被设置为 undefined，let 和 const 声明的变量会被设置为未初始化。函数执行时，如果在变量声明之前访问 var 定义的变量，尽管是 undefined 但是不会报错，但如果在变量声明之前访问 let 和 const 定义的变量就会提示引用错误，这就是所谓的变量提升。
-
-函数类型的声明，特指非变量形式的声明，在执行上下文创建阶段就以及分配好内存地址了，所以在函数定义前可以正常调用它，这就是所谓的函数变量提升；如果是用变量赋值的方式声明函数，参考上述变量提升
-
-### 执行阶段的内容有哪些
-
-根据变量定义，分配内存空间，最后执行代码，完成变量赋值，取值等操作
-
-分配内存时，如果 Javascript 引擎在 let 类型变量声明的位置找不到变量的定义，那么将为其准备一个 undefined 值
-
-## 执行上下文的执行期间存储位置在哪里
-
-执行栈中
-
-### 执行栈是什么
-
-执行栈，也叫调用栈，具有 LIFO（后进先出）结构，用于存储在代码**执行**期间创建的所有执行上下文。
-
-首次运行 JS 代码时，会创建一个全局执行上下文并 Push 到当前的执行栈中。每当发生函数调用，引擎都会为该函数创建一个新的函数执行上下文并 Push 到当前执行栈的栈顶。
-
-根据执行栈 LIFO 规则，当栈顶函数运行完成后，其对应的函数执行上下文将会从执行栈中 Pop 出，上下文控制权将转移到当前执行栈的最顶部的执行上下文。
-
-示例代码如下：
-
-```ts
-var a = 'Hello World!';
-
-function first() {  
-  console.log('Inside first function');  
-  second();  
-  console.log('Again inside first function');  
-}
-
-function second() {  
-  console.log('Inside second function');  
-}
-
-first();  
-console.log('Inside Global Execution Context');
-
-// Inside first function
-// Inside second function
-// Again inside first function
-// Inside Global Execution Context
-```
-
-![stack-exec](./assets/stack-exec.jpg)
 
 ## 参考资源
 
