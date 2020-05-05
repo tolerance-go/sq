@@ -4,6 +4,8 @@
   "description": "Build your own knowledge system with structured problems",
   "version": "0.1.0",
   "license": "MIT",
+  "repository": "git@github.com:tolerance-go/sq.git",
+  "author": "yarnb <yarnbcoder@gmail.com>",
   "scripts": {
     "test": "jest",
     "dev": "vuepress dev docs",
