@@ -15,6 +15,7 @@ const NamesMap = {};
 
 interface TreeNode extends path.ParsedPath {
   children: TreeNode[];
+  options?: any;
 }
 
 const load = (
@@ -26,7 +27,32 @@ const load = (
     const p = path.join(filePath, file);
     const s = fs.statSync(p);
     const info = path.parse(p);
-    const node = { ...info, children: [] };
+
+    let options;
+
+    if (info.ext === '.md') {
+      const content = fs.readFileSync(p, { encoding: 'utf8' });
+      const matches = content.match(/---\n((.|\n)*)\n---/);
+      if (matches) {
+        const [__, r] = matches;
+        const pairs = r
+          .split('\n')
+          .map((item) => item.split(':').map((item) => item.trim()));
+        options = pairs.reduce(
+          (a, [name, value]) => ({
+            ...a,
+            [name]: value,
+          }),
+          {},
+        );
+      }
+      // readme，main 也是对文件夹对描述
+      if (info.name === 'README' || info.name === 'main') {
+        treeNode.options = options;
+      }
+    }
+
+    const node = { ...info, options, children: [] };
 
     if (s.isDirectory()) {
       treeNode.children.push(node);
@@ -52,6 +78,7 @@ const trimPath = (str, other) => {
 
 const parse = (
   treeNode: TreeNode,
+  level = 0,
   result: ParsedTreeNode = {
     collapsable: false,
     sidebarDepth: 100,
@@ -59,6 +86,23 @@ const parse = (
     children: [],
   },
 ): ParsedTreeNode => {
+  const sortFn = (a, b) => {
+    // string type or undefined
+    if (a.options?.order && b.options?.order) {
+      return a.options?.order - b.options?.order;
+    }
+    if (a.options?.order) {
+      console.log(a);
+      return a.options?.order - 0;
+    }
+    if (b.options?.order) {
+      return 0 - b.options?.order;
+    }
+    return 0;
+  };
+
+  treeNode.children.sort(sortFn);
+
   return {
     collapsable: false,
     sidebarDepth: 100,
@@ -75,7 +119,7 @@ const parse = (
           );
         }
         if (child.children.length) {
-          return parse(child);
+          return parse(child, level + 1);
         }
         if (child.ext !== '.md') {
           return;
@@ -111,12 +155,13 @@ const injectComment = (parsedTree: ParsedTreeNode) => {
           old += vssueContent;
           changed = true;
         }
-        if (!old.match(/^#/)) {
-          const arr = child.split('/');
-          const name = arr[arr.length - 2];
-          old = `# ${name}\n${old}`;
-          changed = true;
-        }
+        // 头部可能有 options
+        // if (!old.match(/^#/)) {
+        //   const arr = child.split('/');
+        //   const name = arr[arr.length - 2];
+        //   old = `# ${name}\n${old}`;
+        //   changed = true;
+        // }
         if (changed) {
           fs.writeFileSync(p, old, {
             encoding: 'utf8',
@@ -136,15 +181,14 @@ const generate = (parsedTree: ParsedTreeNode) => {
     .map((item) => {
       if (typeof item === 'string') return;
       const readmeIndex = item.children.findIndex(
-        (item) => typeof item === 'string',
+        (it) => it === `/${item.title}/`,
       );
       if (readmeIndex === -1) {
         throw new Error(`${item.title} 必须有一个 README.md`);
       }
-      const readme = item.children[readmeIndex];
       return {
         text: item.title,
-        link: readme,
+        link: `/${item.title}/`,
       };
     })
     .filter(Boolean);
@@ -153,13 +197,13 @@ const generate = (parsedTree: ParsedTreeNode) => {
     .map((item) => {
       if (typeof item === 'string') return;
       const readmeIndex = item.children.findIndex(
-        (item) => typeof item === 'string',
+        (it) => it === `/${item.title}/`,
       );
 
       if (readmeIndex === -1) {
         throw new Error(`${item.title} 必须有一个 README.md`);
       }
-      const readme = item.children[readmeIndex] as string;
+      const readme = `/${item.title}/`;
       const others = item.children.filter(
         (item, index) => readmeIndex !== index,
       );
