@@ -92,7 +92,6 @@ const parse = (
       return a.options?.order - b.options?.order;
     }
     if (a.options?.order) {
-      console.log(a);
       return a.options?.order - 0;
     }
     if (b.options?.order) {
