@@ -41,6 +41,8 @@ const load = (
 
 interface ParsedTreeNode {
   title: string;
+  collapsable: boolean;
+  sidebarDepth: number;
   children: (ParsedTreeNode | string)[];
 }
 
@@ -50,34 +52,41 @@ const trimPath = (str, other) => {
 
 const parse = (
   treeNode: TreeNode,
-  result: ParsedTreeNode = { title: '', children: [] },
+  result: ParsedTreeNode = {
+    collapsable: false,
+    sidebarDepth: 100,
+    title: '',
+    children: [],
+  },
 ): ParsedTreeNode => {
-  result.title = treeNode.name;
-  result.children = treeNode.children
-    .map((child) => {
-      if (child.name.startsWith('.')) {
-        return;
-      }
-      if (child.children.some((item) => item.name === 'main')) {
-        return trimPath(
-          path.join(child.dir, child.name, 'main'),
-          PathsMap.docs,
-        );
-      }
-      if (child.children.length) {
-        return parse(child);
-      }
-      if (child.ext !== '.md') {
-        return;
-      }
+  return {
+    collapsable: false,
+    sidebarDepth: 100,
+    title: treeNode.name,
+    children: treeNode.children
+      .map((child) => {
+        if (child.name.startsWith('.')) {
+          return;
+        }
+        if (child.children.some((item) => item.name === 'main')) {
+          return trimPath(
+            path.join(child.dir, child.name, 'main'),
+            PathsMap.docs,
+          );
+        }
+        if (child.children.length) {
+          return parse(child);
+        }
+        if (child.ext !== '.md') {
+          return;
+        }
 
-      const name = child.name === 'README' ? '/' : child.name;
+        const name = child.name === 'README' ? '/' : child.name;
 
-      return trimPath(path.join(child.dir, name), PathsMap.docs);
-    })
-    .filter(Boolean);
-
-  return result;
+        return trimPath(path.join(child.dir, name), PathsMap.docs);
+      })
+      .filter(Boolean),
+  };
 };
 
 const injectComment = (parsedTree: ParsedTreeNode) => {
@@ -132,7 +141,7 @@ const generate = (parsedTree: ParsedTreeNode) => {
       if (readmeIndex === -1) {
         throw new Error(`${item.title} 必须有一个 README.md`);
       }
-      const readme = item.children[readmeIndex]
+      const readme = item.children[readmeIndex];
       return {
         text: item.title,
         link: readme,

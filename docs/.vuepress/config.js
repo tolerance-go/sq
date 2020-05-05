@@ -7,6 +7,7 @@ module.exports = {
     sidebarDepth: 6,
     repo: 'tolerance-go/sq',
     lastUpdated: true,
+    lastUpdated: '上次更新', 
     docsDir: 'docs',
     docsBranch: 'master',
     editLinks: true,
@@ -14,10 +15,10 @@ module.exports = {
     nav: require('./nav'),
     sidebar: require('./sidebar'),
   },
-  extraWatchFiles: [
-    '.vuepress/nav.json',
-    '.vuepress/sidebar.json',
-  ],
+  extraWatchFiles: ['.vuepress/nav.json', '.vuepress/sidebar.json'],
+  markdown: {
+    extractHeaders: ['h2', 'h3', 'h4', 'h5', 'h6'],
+  },
   plugins: [
     '@vuepress/back-to-top',
     '@vuepress/medium-zoom',

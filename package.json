@@ -105,7 +105,6 @@
     "vuepress": "^1.4.1"
   },
   "dependencies": {
-    "file-contributors": "^1.0.2",
-    "whatwg-fetch": "^3.0.0"
+    "axios": "^0.19.2"
   }
 }
