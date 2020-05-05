@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import './style.styl';
+import './Visual.styl';
 
 export default {
   props: ['relative', 'height'],
@@ -25,7 +25,7 @@ export default {
         process.env.NODE_ENV === 'development'
           ? 'localhost:1234'
           : '47.92.70.143/visual',
-        ...this.$page.relativePath.split('/').slice(0, -1),
+        ...this.$page.path.split('/').slice(1, -1),
         this.relative,
       ].join('/');
   },

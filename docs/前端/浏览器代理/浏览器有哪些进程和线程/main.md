@@ -86,5 +86,9 @@ Browser 和 Renderer 通信过程
 <br/>
 <br/>
 <br/>
+<ContributorsList />
+<br/>
+<br/>
+<br/>
 <Vssue :title="$title" />
   

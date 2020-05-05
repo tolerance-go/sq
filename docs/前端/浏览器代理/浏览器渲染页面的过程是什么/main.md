@@ -661,5 +661,9 @@ inline 框放置在行中或“行框”中。这些行至少和最高的框一�
 <br/>
 <br/>
 <br/>
+<ContributorsList />
+<br/>
+<br/>
+<br/>
 <Vssue :title="$title" />
   

@@ -2,5 +2,9 @@
 <br/>
 <br/>
 <br/>
+<ContributorsList />
+<br/>
+<br/>
+<br/>
 <Vssue :title="$title" />
   

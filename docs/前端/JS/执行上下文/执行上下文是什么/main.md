@@ -167,12 +167,18 @@ FunctionExectionContext = {
 }
 ```
 
+函数被调用的时候才开始创建函数执行上下文，当然也是先由创建再到入栈执行，再次遇到执行函数语句，反复上述步骤，GlobalExectionContext 和 FunctionExectionContext 先后创建并入栈执行，如果遇到递归在没有结束前，函数执行栈被撑爆掉，程序将会报错
+
 可以观察到，用 var 声明的变量，其位置处于 `变量环境记录` 中，初始化值为 undefined，而 let 和 const 声明的变量及函数声明，其位置处于 `词法环境记录` 中，其中函数初始值为函数引用，而其它则为未初始化状态，这也同样回答了[变量提升的原因是什么](../变量提升的原因是什么/main)
 
 ## 参考资源
 
 - [理解 Javascript 执行上下文和执行栈](https://juejin.im/post/5bdfd3e151882516c6432c32)
 
+<br/>
+<br/>
+<br/>
+<ContributorsList />
 <br/>
 <br/>
 <br/>

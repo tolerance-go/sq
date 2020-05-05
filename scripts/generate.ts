@@ -85,6 +85,10 @@ const injectComment = (parsedTree: ParsedTreeNode) => {
 <br/>
 <br/>
 <br/>
+<ContributorsList />
+<br/>
+<br/>
+<br/>
 <Vssue :title="$title" />
   `;
 
