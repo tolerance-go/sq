@@ -12,14 +12,17 @@
 
 ```bash
 yarn dev
-yarn dev:watch // 同时监听文件，自动执行 yarn generate
 ```
 
-侧边栏导航根据文档结构自动生成，执行命令如下
+侧边栏导航根据文档结构自动生成，执行命令如下，也会给 `.md` 文件注入评论组件
 
 ```bash
 yarn generate
 ```
+
+## Front Matter Config
+
+VuePress 提供了对 [Front Matter](https://vuepress.vuejs.org/zh/guide/markdown.html#front-matter) 的支持，同时本项目扩展了排序字段 `order`，数字越大越靠后，默认为 0
 
 ## Helper
 
