@@ -22,7 +22,10 @@ yarn generate
 
 ## Front Matter Config
 
-VuePress 提供了对 [Front Matter](https://vuepress.vuejs.org/zh/guide/markdown.html#front-matter) 的支持，同时本项目扩展了排序字段 `order`，数字越大越靠后，默认为 0
+VuePress 提供了对 [Front Matter](https://vuepress.vuejs.org/zh/guide/markdown.html#front-matter) 的支持，同时本项目扩展了如下参数
+
+- 排序字段 `order`，数字越大越靠后，默认为 0
+- `sidebar` 控制 README 文件中是否在侧边导航出现，默认为 `false`
 
 ## Helper
 

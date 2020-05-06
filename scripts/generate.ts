@@ -128,6 +128,10 @@ const parse = (
           return;
         }
 
+        if (child.name === 'README' && !child.options?.sidebar) {
+          return;
+        }
+
         const name = child.name === 'README' ? '/' : child.name;
 
         return trimPath(path.join(child.dir, name), PathsMap.docs);
@@ -183,12 +187,6 @@ const generate = (parsedTree: ParsedTreeNode) => {
   const navContent = parsedTree.children
     .map((item) => {
       if (typeof item === 'string') return;
-      const readmeIndex = item.children.findIndex(
-        (it) => it === `/${item.title}/`,
-      );
-      if (readmeIndex === -1) {
-        throw new Error(`${item.title} 必须有一个 README.md`);
-      }
       return {
         text: item.title,
         link: `/${item.title}/`,
@@ -199,19 +197,9 @@ const generate = (parsedTree: ParsedTreeNode) => {
   const sidebarContent = parsedTree.children
     .map((item) => {
       if (typeof item === 'string') return;
-      const readmeIndex = item.children.findIndex(
-        (it) => it === `/${item.title}/`,
-      );
-
-      if (readmeIndex === -1) {
-        throw new Error(`${item.title} 必须有一个 README.md`);
-      }
       const readme = `/${item.title}/`;
-      const others = item.children.filter(
-        (item, index) => readmeIndex !== index,
-      );
       return {
-        [readme]: others,
+        [readme]: item.children,
       };
     })
     .filter(Boolean)
