@@ -108,6 +108,10 @@ const parse = (
     title: treeNode.name,
     children: treeNode.children
       .map((child) => {
+        if (child.name.endsWith('assets')) {
+          return;
+        }
+
         if (child.name.startsWith('.')) {
           return;
         }
@@ -155,12 +159,12 @@ const injectComment = (parsedTree: ParsedTreeNode) => {
           changed = true;
         }
         // 头部可能有 options
-        // if (!old.match(/^#/)) {
-        //   const arr = child.split('/');
-        //   const name = arr[arr.length - 2];
-        //   old = `# ${name}\n${old}`;
-        //   changed = true;
-        // }
+        if (!old.match(/^---/) && !old.match(/^#/)) {
+          const arr = child.split('/');
+          const name = arr[arr.length - 2];
+          old = `# ${name}\n${old}`;
+          changed = true;
+        }
         if (changed) {
           fs.writeFileSync(p, old, {
             encoding: 'utf8',
