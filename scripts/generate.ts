@@ -103,7 +103,7 @@ const parse = (
   treeNode.children.sort(sortFn);
 
   return {
-    collapsable: false,
+    collapsable: level > 2 ? true : false,
     sidebarDepth: 100,
     title: treeNode.name,
     children: treeNode.children
