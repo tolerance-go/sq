@@ -72,11 +72,4 @@ cycle 函数执行完成之后，对象 o1 和 o2 实际上已经不再需要了
 
 - [JavaScript 内存机制](https://www.cnblogs.com/liangyin/p/7764232.html)
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+

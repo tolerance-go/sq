@@ -157,11 +157,4 @@ function create() {
 
 - [深度解析 new 原理及模拟实现](https://muyiy.cn/blog/3/3.5.html#%E5%AE%9A%E4%B9%89)
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+

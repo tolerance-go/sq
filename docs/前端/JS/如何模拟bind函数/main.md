@@ -221,11 +221,4 @@ Function.prototype.bind2 = function (context) {
 
 - [深度解析 bind 原理、使用场景及模拟实现](https://muyiy.cn/blog/3/3.4.html#bind)
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+

@@ -198,11 +198,4 @@ Function.prototype.apply = function (context, arr) {
 
 - [深度解析 call 和 apply 原理、使用场景及实现](https://muyiy.cn/blog/3/3.3.html#call-%E5%92%8C-apply)
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+

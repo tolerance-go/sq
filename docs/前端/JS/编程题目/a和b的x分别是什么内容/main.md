@@ -26,11 +26,4 @@ b.x; // { n: 2 }
 - 赋值操作是从右到左
 - a 的地址在赋值后被修改，而 b 依然是 a 的引用
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+

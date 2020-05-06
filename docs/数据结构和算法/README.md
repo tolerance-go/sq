@@ -2,11 +2,3 @@
 
 ![al.png](/al.png)
 
-<br/>
-<br/>
-<br/>
-<ContributorsList relative="README.md" />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />

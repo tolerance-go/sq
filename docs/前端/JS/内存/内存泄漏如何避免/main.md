@@ -122,11 +122,4 @@ creatFun = null;
 - [JavaScript 深入之 4 类常见内存泄漏及如何避免](https://muyiy.cn/blog/1/1.5.html)
 - [闭包为什么会造成内存泄漏？](https://blog.csdn.net/u013545737/article/details/88323872)
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+

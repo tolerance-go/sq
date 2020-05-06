@@ -93,11 +93,4 @@ myCounter1.increment 和 myCounter2.increment 的函数对象拥有着一样的�
 
 - [深入浅出图解作用域链和闭包](https://muyiy.cn/blog/2/2.1.html#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE)
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+

@@ -95,12 +95,5 @@
 
 2. 函数的所有形参，如果没有实参的话，属性值设为 undefined
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+
   

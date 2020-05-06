@@ -33,11 +33,4 @@ add(1)(2)(3)； // 6
 add(1)(2)(3)(4)； // 10
 ```
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+

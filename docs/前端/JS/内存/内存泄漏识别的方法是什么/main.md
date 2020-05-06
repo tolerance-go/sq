@@ -32,11 +32,4 @@ console.log(process.memoryUsage());
 
 - [JavaScript 深入之带你走进内存机制](https://muyiy.cn/blog/1/1.4.html)
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+

@@ -405,11 +405,4 @@ foo.call(obj); // 2
 
 - [JavaScript深入之史上最全--5种this绑定全面解析](https://muyiy.cn/blog/3/3.1.html)
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+

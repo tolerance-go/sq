@@ -27,11 +27,4 @@
 
 - [JavaScript深入之内存空间详细图解](https://muyiy.cn/blog/1/1.3.html#%E5%8F%98%E9%87%8F%E7%9A%84%E5%AD%98%E6%94%BE)
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+

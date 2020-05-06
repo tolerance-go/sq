@@ -1,6 +1,7 @@
 import fs from 'fs';
+import matter from 'gray-matter';
 import path from 'path';
-// import shell from "shelljs";
+import { trimPath } from './utils';
 
 const cwd = process.cwd();
 
@@ -11,16 +12,20 @@ const PathsMap = {
   sidebar: path.join(cwd, 'docs/.vuepress/sidebar.json'),
 };
 
-const NamesMap = {};
+const HOST =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:8080'
+    : 'http://47.92.70.143';
 
 interface TreeNode extends path.ParsedPath {
   children: TreeNode[];
   options?: any;
+  stats?: fs.Stats;
 }
 
 const load = (
   filePath,
-  treeNode: TreeNode = { ...path.parse(filePath), children: [] },
+  treeNode: TreeNode = { ...path.parse(filePath), stats: null, children: [] },
 ) => {
   const files = fs.readdirSync(filePath);
   files.forEach((file) => {
@@ -28,31 +33,20 @@ const load = (
     const s = fs.statSync(p);
     const info = path.parse(p);
 
-    let options;
+    let options = {};
 
     if (info.ext === '.md') {
       const content = fs.readFileSync(p, { encoding: 'utf8' });
-      const matches = content.match(/---\n((.|\n)*)\n---/);
-      if (matches) {
-        const [__, r] = matches;
-        const pairs = r
-          .split('\n')
-          .map((item) => item.split(':').map((item) => item.trim()));
-        options = pairs.reduce(
-          (a, [name, value]) => ({
-            ...a,
-            [name]: value,
-          }),
-          {},
-        );
-      }
+
+      const { data: options = {} } = matter(content);
+
       // readme，main 也是对文件夹对描述
       if (info.name === 'README' || info.name === 'main') {
         treeNode.options = options;
       }
     }
 
-    const node = { ...info, options, children: [] };
+    const node = { ...info, stats: s, options, children: [] };
 
     if (s.isDirectory()) {
       treeNode.children.push(node);
@@ -72,30 +66,17 @@ interface ParsedTreeNode {
   children: (ParsedTreeNode | string)[];
 }
 
-const trimPath = (str, other) => {
-  return str.replace(other, '');
-};
-
-const parse = (
-  treeNode: TreeNode,
-  level = 0,
-  result: ParsedTreeNode = {
-    collapsable: false,
-    sidebarDepth: 100,
-    title: '',
-    children: [],
-  },
-): ParsedTreeNode => {
+const parse = (treeNode: TreeNode, level = 0): ParsedTreeNode => {
   const sortFn = (a, b) => {
     // string type or undefined
-    if (a.options?.order && b.options?.order) {
-      return a.options?.order - b.options?.order;
+    if (a.options.order && b.options.order) {
+      return a.options.order - b.options.order;
     }
-    if (a.options?.order) {
-      return a.options?.order - 0;
+    if (a.options.order) {
+      return a.options.order - 0;
     }
-    if (b.options?.order) {
-      return 0 - b.options?.order;
+    if (b.options.order) {
+      return 0 - b.options.order;
     }
     return 0;
   };
@@ -128,7 +109,7 @@ const parse = (
           return;
         }
 
-        if (child.name === 'README' && !child.options?.sidebar) {
+        if (child.name === 'README' && !child.options.sidebar) {
           return;
         }
 
@@ -140,50 +121,7 @@ const parse = (
   };
 };
 
-const injectComment = (parsedTree: ParsedTreeNode) => {
-  const vssueContent = `
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
-  `;
-
-  parsedTree.children.forEach((child) => {
-    if (typeof child === 'string') {
-      if (child.endsWith('/main')) {
-        const p = path.join(PathsMap.docs, child) + '.md';
-        let old = fs.readFileSync(p, { encoding: 'utf8' });
-        let changed = false;
-        if (!old.match(/<Vssue :title="\$title" \/>/)) {
-          old += vssueContent;
-          changed = true;
-        }
-        // 头部可能有 options
-        if (!old.match(/^---/) && !old.match(/^#/)) {
-          const arr = child.split('/');
-          const name = arr[arr.length - 2];
-          old = `# ${name}\n${old}`;
-          changed = true;
-        }
-        if (changed) {
-          fs.writeFileSync(p, old, {
-            encoding: 'utf8',
-          });
-        }
-      }
-      return;
-    }
-    if (child.children.length) {
-      injectComment(child);
-    }
-  });
-};
-
-const generate = (parsedTree: ParsedTreeNode) => {
+const generateSidebar = (parsedTree) => {
   const navContent = parsedTree.children
     .map((item) => {
       if (typeof item === 'string') return;
@@ -192,7 +130,15 @@ const generate = (parsedTree: ParsedTreeNode) => {
         link: `/${item.title}/`,
       };
     })
-    .filter(Boolean);
+    .filter(Boolean)
+    .concat({
+      text: 'RSS订阅',
+      items: [
+        { text: 'RSS 2.0', link: `${HOST}/rss.xml`, target: '_blank' },
+        { text: 'Atom 1.0', link: `${HOST}/feed.atom`, target: '_blank' },
+        { text: 'JSON Feed 1.0', link: `${HOST}/feed.json`, target: '_blank' },
+      ],
+    });
 
   const sidebarContent = parsedTree.children
     .map((item) => {
@@ -211,11 +157,11 @@ const generate = (parsedTree: ParsedTreeNode) => {
   fs.writeFileSync(PathsMap.nav, JSON.stringify(navContent), {
     encoding: 'utf8',
   });
+
+  console.log('生成 Sidebar 配置文件', PathsMap.sidebar);
+  console.log('生成 Nav 配置文件', PathsMap.nav);
 };
 
 const tree = load(PathsMap.docs);
-fs.writeFileSync('./tree.json', JSON.stringify(tree));
 const parsedTree = parse(tree);
-fs.writeFileSync('./parsedTree.json', JSON.stringify(parsedTree));
-generate(parsedTree);
-injectComment(parsedTree);
+generateSidebar(parsedTree);

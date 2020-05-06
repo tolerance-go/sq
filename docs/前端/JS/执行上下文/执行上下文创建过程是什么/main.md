@@ -81,11 +81,4 @@ GlobalExectionContext = {  // 全局执行上下文
 
 - [JavaScript 深入之变量对象](https://github.com/mqyqingfeng/Blog/issues/5)
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+

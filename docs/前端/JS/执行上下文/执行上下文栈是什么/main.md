@@ -42,11 +42,4 @@ foo(); // 调用函数f()
 
 ![stack-exec](./assets/stack-exec.jpg)
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+

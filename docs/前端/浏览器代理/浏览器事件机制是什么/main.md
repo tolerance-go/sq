@@ -149,12 +149,5 @@ window.gc();
 
 事件到达目标元素前，或者事件到达目标元素后，冒泡返回，被已绑定事件的父级或祖级元素响应执行。其中，事件对象中的 target 属性记录实际触发本次事件的元素
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+
   

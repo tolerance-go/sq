@@ -22,12 +22,5 @@ Javascript 中有一个执行上下文(execution context)的概念，它定义�
 
 是全局执行上下对应的变量对象：全局对象，在全局环境中定义的变量就会绑定到全局对象中。
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+
   

@@ -31,12 +31,5 @@
 
 - Windows Phone 8 系统浏览器内核是 Trident
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+
   

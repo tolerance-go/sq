@@ -83,12 +83,5 @@ Browser 和 Renderer 通信过程
 2. Renderer 进程的 Renderer 接口收到消息，IO 线程简单处理后，交给渲染线程，进行 HTML 解析和 DOM 树构建，CSS 解析，JS 执行，RenderObject 树构建，布局和绘制等过程，生成用户可见区域（ViewPort）的 Bitmap。最后通过共享内存方式 IPC 给 Browser 进程
 3. Browser 进程使用 Bitmap 内存在界面上绘制出图像。
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+
   

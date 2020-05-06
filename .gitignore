@@ -1,6 +1,9 @@
 # temps
 /docs/.vuepress/nav.json
 /docs/.vuepress/sidebar.json
+/docs/.vuepress/public/rss.xml
+/docs/.vuepress/public/feed.json
+/docs/.vuepress/public/feed.atom
 /public/swagger.json
 
 # scripts test

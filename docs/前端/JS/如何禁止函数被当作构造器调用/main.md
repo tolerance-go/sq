@@ -15,11 +15,4 @@ new Foo();
 
 new 关键字会提前构造 this 对象，该对象会连接到构造函数的原型链上，instanceof 可以用来检测对象是否存在于原型链上
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+

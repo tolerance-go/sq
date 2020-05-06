@@ -27,11 +27,4 @@
 
 <<< @/docs/数据结构和算法/BFS（广度优先）/127-单词接龙/code.ts
 
-<br/>
-<br/>
-<br/>
-<ContributorsList />
-<br/>
-<br/>
-<br/>
-<Vssue :title="$title" />
+
