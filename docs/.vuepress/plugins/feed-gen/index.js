@@ -49,6 +49,8 @@ module.exports = (options, ctx) => {
           }
         }
 
+        if (!hash) throw new Error('没有找到最近的版本号');
+
         let step = 1000;
         let index = -1;
         let count = 1;
@@ -65,6 +67,13 @@ module.exports = (options, ctx) => {
 
           commits = gitlog(options);
           index = commits.findIndex((item) => item.hash === hash);
+
+          console.log(
+            '这组没有发现匹配的 hash',
+            hash,
+            'commits length',
+            commits.length,
+          );
         }
 
         const sinceCommits = commits.slice(0, index);
