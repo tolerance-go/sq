@@ -40,7 +40,8 @@ module.exports = (options, ctx) => {
         let hash;
         for (const decorations of logs.split('\n')) {
           // commit 18ccf21ca46efb619e6a3f73f668c49eecdb0a8b (tag: v0.1.0)
-          var regex = /commit\s(.*)\s\(tag:.*\)/gi;
+          // commit b3d96fd95e15e526e778d339a844ae1e6753cfbc (HEAD -> master, tag: v0.2.0, origin/master)
+          var regex = /commit\s(.*?)\s.*?tag:.*/gi;
           const result = regex.exec(decorations);
           if (result) {
             hash = result[1];
