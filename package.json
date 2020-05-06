@@ -8,7 +8,7 @@
   "author": "yarnb <yarnbcoder@gmail.com>",
   "scripts": {
     "test": "jest",
-    "dev": "cross-env NODE_ENV=development yarn generate && vuepress dev docs",
+    "dev": "cross-env NODE_ENV=development yarn generate:sidebar && vuepress dev docs",
     "dev:visual": "parcel serve -d .parcel docs/**/*.html",
     "dev:server": "nodemon --watch 'service/**/*' -e ts --exec 'ts-node' --project tsconfig.server.json ./service/index.ts",
     "build": "cross-env NODE_ENV=production yarn generate && vuepress build -d dist docs",
@@ -16,9 +16,7 @@
     "build:server": "yarn build:server:apidoc && tsc --build tsconfig.server.json",
     "build:server:apidoc": "swagger-jsdoc docs/**/*.service.ts -d swaggerDef.js -o public/swagger.json",
     "build:all": "yarn build && yarn build:visual && yarn build:server",
-    "generate": "yarn generate:sidebar && yarn generate:feed",
-    "generate:sidebar": "ts-node ./scripts/nav-gen.ts",
-    "generate:feed": "ts-node ./scripts/feed-gen.ts",
+    "generate": "ts-node ./scripts/nav-gen.ts",
     "publish": "lerna-changelog",
     "pre-commit": "yarn test",
     "clean": "rimraf dist dist-visual dist-server"

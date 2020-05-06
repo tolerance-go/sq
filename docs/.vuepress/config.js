@@ -54,6 +54,7 @@ module.exports = {
   plugins: [
     '@vuepress/back-to-top',
     '@vuepress/medium-zoom',
+    require('./plugins/feed-gen/index.js'),
     process.env.VUEPRESS
       ? [
           '@vssue/vuepress-plugin-vssue',
