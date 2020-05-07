@@ -1,5 +1,6 @@
 ---
 order: 998
+sidebar: true
 ---
 
 # 晓问题

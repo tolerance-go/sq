@@ -8,7 +8,7 @@
   "author": "yarnb <yarnbcoder@gmail.com>",
   "scripts": {
     "test": "jest",
-    "dev": "cross-env NODE_ENV=development yarn generate:sidebar && vuepress dev docs",
+    "dev": "cross-env NODE_ENV=development vuepress dev docs",
     "dev:visual": "parcel serve -d .parcel docs/**/*.html",
     "dev:server": "nodemon --watch 'service/**/*' -e ts --exec 'ts-node' --project tsconfig.server.json ./service/index.ts",
     "build": "cross-env NODE_ENV=production yarn generate && vuepress build -d dist docs",

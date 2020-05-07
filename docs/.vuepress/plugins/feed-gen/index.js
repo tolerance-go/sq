@@ -68,12 +68,22 @@ module.exports = (options, ctx) => {
           commits = gitlog(options);
           index = commits.findIndex((item) => item.hash === hash);
 
-          console.log(
-            '这组没有发现匹配的 hash',
-            hash,
-            'commits length',
-            commits.length,
-          );
+          if (index === -1) {
+            console.log(
+              '这组没有发现匹配的 hash',
+              hash,
+              'commits length',
+              commits.length,
+            );
+          } else {
+            console.log(
+              '发现匹配的 hash',
+              hash,
+              index,
+              'commits length',
+              commits.length,
+            );
+          }
         }
 
         const sinceCommits = commits.slice(0, index);

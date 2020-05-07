@@ -38,7 +38,8 @@ const load = (
     if (info.ext === '.md') {
       const content = fs.readFileSync(p, { encoding: 'utf8' });
 
-      const { data: options = {} } = matter(content);
+      const { data = {} } = matter(content);
+      options = data;
 
       // readme，main 也是对文件夹对描述
       if (info.name === 'README' || info.name === 'main') {
