@@ -50,6 +50,7 @@ module.exports = (options, ctx) => {
         }
 
         if (!hash) throw new Error('没有找到最近的版本号');
+        console.log('找到最近版本号记录 hash：', hash);
 
         let step = 1000;
         let index = -1;
@@ -68,26 +69,20 @@ module.exports = (options, ctx) => {
           commits = gitlog(options);
           index = commits.findIndex((item) => item.hash === hash);
 
-          if (index === -1) {
-            console.log(
-              '这组没有发现匹配的 hash',
-              hash,
-              'commits length',
-              commits.length,
-            );
-          } else {
-            console.log(
-              '发现匹配的 hash',
-              hash,
-              index,
-              'commits length',
-              commits.length,
-            );
-          }
+          console.log(
+            'hash匹配结果：',
+            'index',
+            index,
+            'commits length',
+            commits.length,
+          );
         }
 
         // rss 生成包括最近版本号本身
         const sinceCommits = commits.slice(0, index + 1);
+
+        console.log('距离上个版本的 commit 集合：', sinceCommits.length);
+
         const allChangedFiles = new Set();
 
         sinceCommits.forEach((item) =>
@@ -109,10 +104,12 @@ module.exports = (options, ctx) => {
             }
           });
 
+        console.log('所有存在修改记录的 md 文件：', allChangedMd.length);
+
         return allChangedMd;
       };
 
-      // 如果不清除 commit 的前提下，我选择使用 github 的算法来获取文件的贡献者，可能某刻 commit 会超多的吧，嘿嘿
+      // 获取 Github 作者提交信息
       const getFileContributors = (resoucePath) => {
         const authors = [];
         const consumedAuthors = {};

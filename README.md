@@ -20,12 +20,31 @@ yarn dev
 yarn generate
 ```
 
+## 全站自动生成 Feed 订阅文件
+
+![feed.png](assets/feed.png)
+
+参考 vuepress [自定义使用插件](https://vuepress.vuejs.org/zh/plugin/using-a-plugin.html)，大致流程如下：
+
+1. 生产环境下，构建结束后：检测距离到上一个有版本 tag 的 commit（包括），找到之间所有修改的 md 文件
+
+2. 根据修改文件记录，通过调用 github-api 获取所有作者和贡献者信息
+
+3. 根据文件内容生成 front options，覆盖默认 feed 参数
+
+4. 根据文件内容生成 html 标记，vue 组件和相对路径需要提前特殊处理
+
+5. 将对应文件和作者信息打包，通过 [Feed](https://github.com/jpmonette/feed) 生成静态文件输出到 outDir 目录
+
 ## Front Matter Config
 
 VuePress 提供了对 [Front Matter](https://vuepress.vuejs.org/zh/guide/markdown.html#front-matter) 的支持，同时本项目扩展了如下参数
 
 - 排序字段 `order`，数字越大越靠后，默认为 0
 - `sidebar` 控制 README 文件中是否在侧边导航出现，默认为 `false`
+- `feed` 参数控制文件是否被自动生成 Feed 订阅内容，默认为 `true`
+  - 文件修改记录只在未发布阶段有效
+  - 可以通过 [id 子字段](https://github.com/jpmonette/feed#example) 强制更新
 
 ## Helper
 
