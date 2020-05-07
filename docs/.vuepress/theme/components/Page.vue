@@ -4,7 +4,7 @@
 
     <Content class="theme-default-content" />
 
-    <ContributorsList />
+    <ContributorsList :key="$title + 'ContributorsList'" />
 
     <PageEdit />
 
@@ -22,9 +22,6 @@ import PageNav from '@theme/components/PageNav.vue';
 export default {
   components: { PageEdit, PageNav },
   props: ['sidebarItems'],
-  updated(a, b) {
-    console.log('asdfasf');
-  },
 };
 </script>
 

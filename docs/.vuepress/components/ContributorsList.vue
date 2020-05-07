@@ -17,7 +17,6 @@ import axios from 'axios';
 const getFileContributors = (owner, repo, path) => {
   const authors = [];
   const consumedAuthors = {};
-
   return axios
     .get(`https://api.github.com/repos/${owner}/${repo}/commits?path=${path}`)
     .then((response) => {
@@ -43,13 +42,14 @@ export default {
     };
   },
   async mounted() {
+    const paths = this.$page.path.split('/');
     const file = {
       owner: 'tolerance-go',
       repo: 'sq',
       path: [
         'docs',
-        ...this.$page.path.split('/').slice(1, -1),
-        this.relative || 'main.md',
+        ...paths.slice(1, -1),
+        this.relative || paths.slice(-1)[0].replace('.html', '.md'),
       ].join('/'),
     };
 
