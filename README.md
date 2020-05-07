@@ -40,8 +40,10 @@ yarn generate
 
 VuePress 提供了对 [Front Matter](https://vuepress.vuejs.org/zh/guide/markdown.html#front-matter) 的支持，同时本项目扩展了如下参数
 
+README 文件和 main 文件分别代表所容纳的文件夹
+
 - 排序字段 `order`，数字越大越靠后，默认为 0
-- `sidebar` 控制 README 文件中是否在侧边导航出现，默认为 `false`
+- `hiddenInSidebar` 控制 README 文件中是否在侧边导航出现，默认为 `false`
 - `feed` 参数控制文件是否被自动生成 Feed 订阅内容，默认为 `true`
   - 文件修改记录只在未发布阶段有效
   - 可以通过 [id 子字段](https://github.com/jpmonette/feed#example) 强制更新
