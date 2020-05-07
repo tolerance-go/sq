@@ -86,7 +86,8 @@ module.exports = (options, ctx) => {
           }
         }
 
-        const sinceCommits = commits.slice(0, index);
+        // rss 生成包括最近版本号本身
+        const sinceCommits = commits.slice(0, index + 1);
         const allChangedFiles = new Set();
 
         sinceCommits.forEach((item) =>
