@@ -14,7 +14,7 @@
 yarn dev
 ```
 
-侧边栏导航根据文档结构自动生成，执行命令如下，也会给 `.md` 文件注入评论组件
+侧边栏导航根据文档结构自动生成，执行命令如下，会在构建前自动调用
 
 ```bash
 yarn generate
@@ -45,6 +45,19 @@ VuePress 提供了对 [Front Matter](https://vuepress.vuejs.org/zh/guide/markdow
 - `feed` 参数控制文件是否被自动生成 Feed 订阅内容，默认为 `true`
   - 文件修改记录只在未发布阶段有效
   - 可以通过 [id 子字段](https://github.com/jpmonette/feed#example) 强制更新
+
+## 全局组件
+
+- ContributorsList 获取文件作者和贡献者信息列表自动展示在文件下方
+
+- Visual 在页面使用 iframe 展示 parcel 生成的静态页面，使用 iframe 的好处：
+
+  - RSS 阅读器友好
+  - 页面动态化展示
+  - 反向提高了 Demo 的独立性
+
+- [Vssue](https://github.com/meteorlxy/vssue) 自动在文章下方展示了评论组件，联动了 Github repo 和 issue，需要点击初始化
+- Q 用于用户手动切换文本显示内容的组件，主要用于 [晓问题](http://47.92.70.143/%E6%99%93%E9%97%AE%E9%A2%98/) 栏目的答案隐藏
 
 ## Helper
 
