@@ -1,13 +1,9 @@
 <template>
   <div class="contributor-list">
     <span class="title">编辑者们：</span>
-    <a
-      v-for="item in contributors"
-      :key="item.id"
-      :href="item.html_url"
-      target="_blank"
-      ><img class="avatar" :src="item.avatar_url + '&s=32'"
-    /></a>
+    <a v-for="item in contributors" :key="item.id" :href="item.html_url" target="_blank">
+      <img class="avatar" :src="item.avatar_url + '&s=32'" />
+    </a>
   </div>
 </template>
 <script>
@@ -18,7 +14,11 @@ const getFileContributors = (owner, repo, path) => {
   const authors = [];
   const consumedAuthors = {};
   return axios
-    .get(`https://api.github.com/repos/${owner}/${repo}/commits?path=${path}`)
+    .get(`https://api.github.com/repos/${owner}/${repo}/commits?path=${path}`, {
+      headers: {
+        Authorization: `token ${process.env.GITHUB_TOKEN}`,
+      }
+    })
     .then((response) => {
       const commits = response.data;
       commits.forEach((commit) => {
@@ -34,6 +34,8 @@ const getFileContributors = (owner, repo, path) => {
     });
 };
 
+
+
 export default {
   props: ['relative'],
   data() {
@@ -42,6 +44,7 @@ export default {
     };
   },
   async mounted() {
+
     const paths = this.$page.path.split('/');
     const file = {
       owner: 'tolerance-go',

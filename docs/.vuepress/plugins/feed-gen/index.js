@@ -113,11 +113,17 @@ module.exports = (options, ctx) => {
       const getFileContributors = (resoucePath) => {
         const authors = [];
         const consumedAuthors = {};
+
         return axios
           .get(
-            `https://api.github.com/repos/tolerance-go/sq/commits?path=${encodeURI(
+            `https://api.github.com/repos/tolerance-go/sq/commits?path=${encodeURIComponent(
               resoucePath,
             )}`,
+            {
+              headers: {
+                Authorization: `token ${process.env.GITHUB_TOKEN}`,
+              },
+            },
           )
           .then((response) => {
             const commits = response.data;
@@ -203,7 +209,7 @@ module.exports = (options, ctx) => {
             link: githubAuthor.html_url,
           });
 
-          const [__, title] = content.match(/#\s?(.*)\n/);
+          const [__, title] = content.match(/#\s?(.*)\n?/);
 
           const parsedPath = path.parse(pathStr);
 

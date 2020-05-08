@@ -1,5 +1,6 @@
 ---
 hiddenInSidebar: true
+order: 2
 ---
 
 # 数据结构和算法

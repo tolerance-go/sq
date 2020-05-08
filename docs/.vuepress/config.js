@@ -1,5 +1,9 @@
 const fs = require('fs');
-require('dotenv').config();
+const envData = require('dotenv').config();
+
+if (envData.error) {
+  throw envData.error;
+}
 
 const HOST =
   process.env.NODE_ENV === 'development'
@@ -69,4 +73,17 @@ module.exports = {
         ]
       : null,
   ].filter(Boolean),
+  chainWebpack(config) {
+    config.plugin('injections').tap(([options]) => [
+      Object.assign(
+        options,
+        Object.keys(envData.parsed).reduce((obj, key) => {
+          return {
+            ...obj,
+            [`process.env.${key}`]: JSON.stringify(envData.parsed[key]),
+          };
+        }),
+      ),
+    ]);
+  },
 };
