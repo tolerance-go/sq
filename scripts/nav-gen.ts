@@ -23,6 +23,8 @@ interface TreeNode extends path.ParsedPath {
   stats?: fs.Stats;
 }
 
+const totalMap = {};
+
 const load = (
   filePath,
   treeNode: TreeNode = { ...path.parse(filePath), stats: null, children: [] },
@@ -33,13 +35,23 @@ const load = (
     const s = fs.statSync(p);
     const info = path.parse(p);
 
-    let options = {};
+    let options: { [key: string]: any } = {};
 
     if (info.ext === '.md') {
       const content = fs.readFileSync(p, { encoding: 'utf8' });
 
       const { data = {} } = matter(content);
       options = data;
+
+      const matches = filePath.match(new RegExp(`${PathsMap.docs}/(.*?)/`));
+      if (matches !== null) {
+        if (info.name === 'README' && options.hiddenInSidebar) {
+        } else {
+          totalMap[matches[1]]
+            ? totalMap[matches[1]]++
+            : (totalMap[matches[1]] = 1);
+        }
+      }
 
       // readme，main 也是对文件夹对描述
       if (info.name === 'README' || info.name === 'main') {
@@ -123,22 +135,32 @@ const parse = (treeNode: TreeNode, level = 0): ParsedTreeNode => {
 };
 
 const generateSidebar = (parsedTree) => {
-  const getNavTitle = (title) => {
-    if (title === '晓问题') {
-      return '晓问题 🌱';
-    }
-    return title;
-  };
-
   const navContent = parsedTree.children
     .map((item) => {
       if (typeof item === 'string') return;
       return {
-        text: getNavTitle(item.title),
+        text: item.title,
         link: `/${item.title}/`,
       };
     })
     .filter(Boolean)
+    .map((item) => {
+      if (item.text === '晓问题') {
+        return {
+          ...item,
+          text: '晓问题 🌱',
+        };
+      }
+
+      if (totalMap[item.text]) {
+        return {
+          ...item,
+          text: `${item.text}(${totalMap[item.text]})`,
+        };
+      }
+      return item;
+    })
+
     .concat({
       text: 'RSS订阅',
       items: [
