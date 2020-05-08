@@ -2,9 +2,7 @@
   <main class="page">
     <slot name="top" />
 
-    <Content
-      v-bind:class="{ 'qa-page': isQaPage, 'theme-default-content': true }"
-    />
+    <Content v-bind:class="{ 'qa-page': isQaPage, 'theme-default-content': true }" />
 
     <ContributorsList :key="$title + 'ContributorsList'" />
 
@@ -45,7 +43,12 @@ export default {
               content.querySelectorAll(
                 '.content__default > p, .content__default > ul > li, .content__default > ol > li, .content__default > div > pre',
               ),
-            ).forEach((node) => {
+            ).filter(node => {
+              return !(node.tagName.toLowerCase() === 'li' 
+              && node.parentElement 
+              && node.parentElement.previousElementSibling 
+              && node.parentElement.previousElementSibling.id === '参考资源')
+            }).forEach((node) => {
               node.classList.remove('qa', 'hidden');
               node.classList.add('qa', 'hidden');
               node.onclick = () => {
@@ -71,54 +74,52 @@ export default {
 </script>
 
 <style lang="stylus">
-@require '../styles/wrapper.styl'
+@require '../styles/wrapper.styl';
 
-.page
-  padding-bottom 2rem
-  display block
-
-
+.page {
+  padding-bottom: 2rem;
+  display: block;
+}
 
 @keyframes mova {
-    0% {
-        background-position: 200% 0;
-    }
+  0% {
+    background-position: 200% 0;
+  }
 
-    to {
-        background-position: -200% 0;
-    }
+  to {
+    background-position: -200% 0;
+  }
 }
 
 .qa-page {
-    > h2 {
-        margin-top: 0 !important;
-    }
+  > h2 {
+    margin-top: 0 !important;
+  }
 }
 
 .qa {
-    cursor: pointer;
+  cursor: pointer;
 
-    &.hidden {
-        z-index: 999;
-        border-radius: 5px;
-        transition: width, height 0.15s ease-out;
-        background-image: linear-gradient(
-            270deg,
-            #fafafa,
-            #eaeaea,
-            #eaeaea,
-            #fafafa
-        ) !important;
-        background-size: 400% 100% !important;
-        animation: mova 8s ease-in-out infinite;
-        display: block;
-        width: auto;
+  &.hidden {
+    z-index: 999;
+    border-radius: 5px;
+    transition: width, height 0.15s ease-out;
+    background-image: linear-gradient(
+      270deg,
+      #fafafa,
+      #eaeaea,
+      #eaeaea,
+      #fafafa
+    ) !important;
+    background-size: 400% 100% !important;
+    animation: mova 8s ease-in-out infinite;
+    display: block;
+    width: auto;
+    color: transparent;
 
-        color: transparent;
-
-        > * {
-            visibility hidden;
-        }
+    > * {
+      visibility: hidden;
     }
+  }
 }
 </style>
