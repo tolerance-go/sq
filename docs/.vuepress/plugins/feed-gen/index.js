@@ -38,12 +38,14 @@ module.exports = (options, ctx) => {
         const logs = shell.exec('git log --decorate --no-color').stdout;
 
         let hash;
-        for (const decorations of logs.split('\n')) {
+        const logArr = logs.split('\n');
+        for (let i = 0; i < logArr.length; i++) {
+          const decorations = logArr[i];
           // commit 18ccf21ca46efb619e6a3f73f668c49eecdb0a8b (tag: v0.1.0)
           // commit b3d96fd95e15e526e778d339a844ae1e6753cfbc (HEAD -> master, tag: v0.2.0, origin/master)
           var regex = /commit\s(.*?)\s.*?tag:.*/gi;
           const result = regex.exec(decorations);
-          if (result) {
+          if (result && i !== 0) {
             hash = result[1];
             break;
           }
@@ -78,8 +80,8 @@ module.exports = (options, ctx) => {
           );
         }
 
-        // rss 生成包括最近版本号本身
-        const sinceCommits = commits.slice(0, index + 1);
+        // rss 生成不包括最近版本号本身
+        const sinceCommits = commits.slice(0, index);
 
         console.log('距离上个版本的 commit 集合：', sinceCommits.length);
 
