@@ -59,7 +59,6 @@ README 文件和 main 文件分别代表所容纳的文件夹
   - 反向提高了 Demo 的独立性
 
 - [Vssue](https://github.com/meteorlxy/vssue) 自动在文章下方展示了评论组件，联动了 Github repo 和 issue，需要点击初始化
-- Q 用于用户手动切换文本显示内容的组件，主要用于 [晓问题](http://47.92.70.143/%E6%99%93%E9%97%AE%E9%A2%98/) 栏目的答案隐藏
 
 ## Helper
 

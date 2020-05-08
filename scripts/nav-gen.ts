@@ -123,11 +123,18 @@ const parse = (treeNode: TreeNode, level = 0): ParsedTreeNode => {
 };
 
 const generateSidebar = (parsedTree) => {
+  const getNavTitle = (title) => {
+    if (title === '晓问题') {
+      return '晓问题 🌱';
+    }
+    return title;
+  };
+
   const navContent = parsedTree.children
     .map((item) => {
       if (typeof item === 'string') return;
       return {
-        text: item.title,
+        text: getNavTitle(item.title),
         link: `/${item.title}/`,
       };
     })
