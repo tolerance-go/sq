@@ -1,6 +1,7 @@
 ---
 order: 999
 feed: false
+hiddenInSidebar: true
 ---
 
 # 更新日志
