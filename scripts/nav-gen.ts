@@ -110,7 +110,7 @@ const parse = (treeNode: TreeNode, level = 0): ParsedTreeNode => {
           return;
         }
 
-        if (child.name === 'README' && !child.options.sidebar) {
+        if (child.name === 'README' && child.options.hiddenInSidebar) {
           return;
         }
 

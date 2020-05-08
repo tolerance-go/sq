@@ -1,3 +1,7 @@
+---
+hiddenInSidebar: true
+---
+
 # 数据结构和算法
 
 ## 数据结构

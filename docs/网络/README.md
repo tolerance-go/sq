@@ -1,3 +1,7 @@
+---
+hiddenInSidebar: true
+---
+
 # 网络
 
 ## 计算机网络
