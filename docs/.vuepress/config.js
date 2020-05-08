@@ -74,6 +74,10 @@ module.exports = {
       : null,
   ].filter(Boolean),
   chainWebpack(config) {
+    // RSS 需要生成后的 URL 链接提取出来
+    config.module.rule('images').uses.delete('url-loader');
+    config.module.rule('images').use('file-loader').loader('file-loader');
+
     config.plugin('injections').tap(([options]) => [
       Object.assign(
         options,
