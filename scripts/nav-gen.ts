@@ -145,10 +145,11 @@ const generateSidebar = (parsedTree) => {
     })
     .filter(Boolean)
     .map((item) => {
-      if (item.text === '晓问题') {
+      const n = '晓问题';
+      if (item.text === n) {
         return {
           ...item,
-          text: '晓问题 🌱',
+          text: `${n}(${totalMap[n]}) 🌱`,
         };
       }
 

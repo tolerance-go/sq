@@ -3,4 +3,4 @@ order: -1
 hiddenInSidebar: true
 ---
 
-# 内存
+# 继承
