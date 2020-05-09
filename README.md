@@ -26,7 +26,9 @@ yarn generate
 
 参考 vuepress [自定义使用插件](https://vuepress.vuejs.org/zh/plugin/using-a-plugin.html)，大致流程如下：
 
-1. 生产环境下，构建结束后：检测距离到上一个有版本 tag 的 commit（包括），找到之间所有修改的 md 文件
+1. 生产环境下，构建结束后：检测距离到上一个有版本 tag 的 commit（不包括），找到之间所有修改的 md 文件
+
+   如果 head 就是 tag，则跳过，继续寻找上一个 tag 记录
 
 2. 根据修改文件记录，通过调用 github-api 获取所有作者和贡献者信息
 
