@@ -211,7 +211,9 @@ module.exports = (options, ctx) => {
             link: githubAuthor.html_url,
           });
 
-          const [__, title] = content.match(/#\s?(.*)\n?/);
+          const r = content.match(/#\s?(.*)\n?/);
+          if (r == null) throw new Error(`${pathStr} 必须存在一个 title`);
+          const [__, title] = r;
 
           const parsedPath = path.parse(pathStr);
 

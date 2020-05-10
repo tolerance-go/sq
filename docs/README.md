@@ -13,4 +13,5 @@ features:
   - title: 合作式编程
     details: 和 Github 全面联动，版本驱动，支持修改与评论功能
 footer: MIT Licensed | Copyright © 2019-present
+feed: false
 ---
