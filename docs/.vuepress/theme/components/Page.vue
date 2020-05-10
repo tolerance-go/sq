@@ -65,8 +65,7 @@ export default {
   computed: {
     isQaPage() {
       return (
-        this.$page.relativePath.startsWith('晓问题') &&
-        this.$page.relativePath.endsWith('main.md')
+        this.$page.relativePath.startsWith('晓问题') 
       );
     },
   },
