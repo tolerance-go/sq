@@ -1,5 +1,9 @@
 # JS
 
+## 9. && 和 || 的优先级谁更高呢 <Badge text="简单" />
+
+&&
+
 ## 8. 如何判断准确判断对象数组类型呢 <Badge text="简单" />
 
 - `Object.prototype.toString.call(item) === '[object Array]'`

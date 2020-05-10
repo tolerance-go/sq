@@ -47,7 +47,8 @@ export default {
               return !(node.tagName.toLowerCase() === 'li' 
               && node.parentElement 
               && node.parentElement.previousElementSibling 
-              && node.parentElement.previousElementSibling.id === '参考资源')
+              && node.parentElement.previousElementSibling.id === '参考资源' 
+              || node.textContent === '点击显示隐藏内容')
             }).forEach((node) => {
               node.classList.remove('qa', 'hidden');
               node.classList.add('qa', 'hidden');
