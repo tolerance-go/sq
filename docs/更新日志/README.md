@@ -10,6 +10,25 @@ hiddenInSidebar: true
 
 该项目的所有较大变化都将记录在本文件中。有关提交准则，请参见[Conventional Commits](https://conventionalcommits.org)。
 
+## 0.4.0 (2020-05-10)
+
+#### :book: Documentation
+
+- [#25](https://github.com/tolerance-go/sq/pull/25) docs: 增加了一些资源分享 ([@tolerance-go](https://github.com/tolerance-go))
+- [#22](https://github.com/tolerance-go/sq/pull/22) docs: 新增文章：前端/JS/异步/JS 异步解决方案有哪些 ([@tolerance-go](https://github.com/tolerance-go))
+- [#23](https://github.com/tolerance-go/sq/pull/23) docs: 新增文章：前端/浏览器代理/EventLoop 是什么 ([@tolerance-go](https://github.com/tolerance-go))
+- [#24](https://github.com/tolerance-go/sq/pull/24) docs: 新增文章：前端/CSS/实现水平垂直居中的方式有哪些 ([@tolerance-go](https://github.com/tolerance-go))
+- [#17](https://github.com/tolerance-go/sq/pull/17) docs: 新增文章：前端/框架/React/VirtualDOM 是什么 ([@tolerance-go](https://github.com/tolerance-go))
+- [#18](https://github.com/tolerance-go/sq/pull/18) docs: 新增文章：前端/框架/React/Fiber 是什么 ([@tolerance-go](https://github.com/tolerance-go))
+- [#19](https://github.com/tolerance-go/sq/pull/19) docs: 新增文章：前端/框架/React/Diff 算法是什么 ([@tolerance-go](https://github.com/tolerance-go))
+- [#20](https://github.com/tolerance-go/sq/pull/20) docs: 新增文章：前端/框架/React/生命周期执行顺序是什么 ([@tolerance-go](https://github.com/tolerance-go))
+- [#21](https://github.com/tolerance-go/sq/pull/21) docs: 新增文章：前端/浏览器代理 相关文章 ([@tolerance-go](https://github.com/tolerance-go))
+- [#16](https://github.com/tolerance-go/sq/pull/16) docs: 增加文章：CSS/如何实现圣杯和双飞翼布局 ([@tolerance-go](https://github.com/tolerance-go))
+
+#### Committers: 1
+
+- by ([@tolerance-go](https://github.com/tolerance-go))
+
 ## 0.3.0 (2020-05-08)
 
 #### :rocket: Enhancement
