@@ -386,8 +386,7 @@ leetcode 上有一道简单的求编辑距离的[题目](https://leetcode-cn.com
 ## 16 版本的变化
 
 1. 链表的每一个节点是 Fiber，而不是在 16 之前的虚拟 DOM 节点
-2. Diff 同时是构建 WorkInProgress Tree 的过程，同时得到 `Effect List`，给下一个阶段 `commit` 做准备
-3. 做 Diff 的目的就是为了复用节点
+2. Diff 不仅是对比的过程，同时是构建 WorkInProgress Tree 的过程，得到 `Effect List`，给下一个阶段 `commit` 做准备
 
 ## 参考资源
 
