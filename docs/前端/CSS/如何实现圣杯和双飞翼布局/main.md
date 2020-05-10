@@ -98,7 +98,7 @@ footer {
 
 #### 3. 相对移动 left 和 right
 
-利用 margin-left 将两侧内容拉回来，注意 margin-left 为百分比是[相对于父级宽度的](../CSS样式的百分比都相对于谁/main.md)
+利用 margin-left 将两侧内容拉回来，注意 margin-left 为百分比是[相对于父级宽度的](../CSS样式的百分比都相对于谁/main.html)
 
 ```css
 .left {

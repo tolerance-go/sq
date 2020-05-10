@@ -1,21 +1,14 @@
 # Fiber 是什么
 
-## 名词解释
-
-- Reconciler：是一个名词，可以说是 React 工作的一个模块，协调模块
-- reconcile：是调和器调和的动作，是一个动词
-- reconciliation：是 reconcile 过程的第一个阶段
-- phase：表示调和过程的阶段
-
 ## 产生的动机
 
 ### React 16 之前的不足
 
-首先我们了解一下 React 的工作过程，当我们通过 render()和 setState() 进行组件渲染和更新的时候，[React 主要有两个阶段](/前端/框架/React/VirtualDOM是什么/main.md#执行流程)
+首先我们了解一下 React 的工作过程，当我们通过 render()和 setState() 进行组件渲染和更新的时候，[React 主要有两个阶段](/前端/框架/React/VirtualDOM是什么/main.html#执行流程)
 
 在协调阶段阶段，由于是采用的递归的遍历方式，这种也被成为 Stack Reconciler，主要是为了区别 Fiber Reconciler 取的一个名字。
 
-这种方式有一个特点：一旦任务开始进行，就无法中断，那么 js 将一直占用主线程， 一直要等到整棵 Virtual DOM 树计算完成之后，才能把执行权交给渲染引擎，那么这就会导致一些用户交互、动画等任务无法立即得到处理，就会有[卡顿](/前端/浏览器代理/浏览器页面为什么会卡顿/main.md)，非常的影响用户体验。
+这种方式有一个特点：一旦任务开始进行，就无法中断，那么 js 将一直占用主线程， 一直要等到整棵 Virtual DOM 树计算完成之后，才能把执行权交给渲染引擎，那么这就会导致一些用户交互、动画等任务无法立即得到处理，就会有[卡顿](/前端/浏览器代理/浏览器页面为什么会卡顿/main.html)，非常的影响用户体验。
 
 ### 解决方案
 
@@ -25,7 +18,7 @@
 
 合作式调度主要就是用来分配任务的，当有更新任务来的时候，不会马上去做 Diff 操作，而是先把当前的更新送入一个 Update Queue 中，然后交给 Scheduler 去处理，Scheduler 会根据当前主线程的使用情况去处理这次 Update。
 
-为了实现这种特性，使用了 [requestIdelCallbackAPI](/前端/浏览器代理/性能优化/requestIdleCallback是什么/main.md)。对于不支持这个 API 的浏览器，React 会加上 pollyfill。
+为了实现这种特性，使用了 [requestIdelCallbackAPI](/前端/浏览器代理/性能优化/requestIdleCallback是什么/main.html)。对于不支持这个 API 的浏览器，React 会加上 pollyfill。
 
 在两个执行帧之间，主线程通常会有一小段空闲时间，requestIdleCallback 可以在这个空闲期（Idle Period）调用空闲期回调（Idle Callback），执行一些任务。
 
@@ -163,7 +156,7 @@ workInProgress tree 上每个节点都有一个 effect list，用来存放需要
 
 ![alternate](./assets/alternate.png)
 
-render 阶段会执行[render 生命方法顺序前的生命周期方法](/前端/框架/React/生命周期执行顺序是什么/main.md#_16-版本-render-之前)，不过由于本阶段是可中断的，一旦中断之后恢复的时候又会重新执行，所以很可能阶段内的生命周期方法会被多次调用，所以在 reconciliation/render 阶段的生命周期的方法是不稳定的，我想这也是 React 为什么要废弃 componentWillMount 和 componentWillReceiveProps 方法而改为静态方法 getDerivedStateFromProps 的原因吧。
+render 阶段会执行[render 生命方法顺序前的生命周期方法](/前端/框架/React/生命周期执行顺序是什么/main.html#_16-版本-render-之前)，不过由于本阶段是可中断的，一旦中断之后恢复的时候又会重新执行，所以很可能阶段内的生命周期方法会被多次调用，所以在 reconciliation/render 阶段的生命周期的方法是不稳定的，我想这也是 React 为什么要废弃 componentWillMount 和 componentWillReceiveProps 方法而改为静态方法 getDerivedStateFromProps 的原因吧。
 
 #### commit 阶段
 
@@ -171,7 +164,7 @@ commit 阶段可以理解为就是将 Diff 的结果反映到真实 DOM 的过�
 
 在 commit 阶段，在 commitRoot 里会根据 effect 的 effectTag ，进行对应的插入、更新、删除操作，根据 tag 不同，调用不同的更新方法。
 
-commit 阶段会执行[render 生命方法顺序之后的生命周期方法](/前端/框架/React/生命周期执行顺序是什么/main.md#_16-版本-render-之后)
+commit 阶段会执行[render 生命方法顺序之后的生命周期方法](/前端/框架/React/生命周期执行顺序是什么/main.html#_16-版本-render-之后)
 
 ### Fiber Tree 和 WorkInProgress Tree
 
@@ -207,6 +200,13 @@ Fiber Tree 一个重要的特点是**链表结构**，因此可以将**递归遍
 采用的是一种叫**双缓冲技术（double buffering）**，这个时候就需要另外一颗树：WorkInProgress Tree，它反映了要刷新到屏幕的未来状态，在 render 或者 setState 的方法调用的时候进行构建
 
 WorkInProgress Tree 构造完毕，得到的就是新的 Fiber Tree，然后把 current 指针指向 WorkInProgress Tree，这样能够复用内存中已经存在的 Fiber 对象
+
+## 名词解释
+
+- Reconciler：是一个名词，可以说是 React 工作的一个模块，协调模块
+- reconcile：是调和器调和的动作，是一个动词
+- reconciliation：是 reconcile 过程的第一个阶段
+- phase：表示调和过程的阶段
 
 ## 后记
 

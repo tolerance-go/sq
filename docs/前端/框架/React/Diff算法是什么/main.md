@@ -2,7 +2,7 @@
 
 ## 目标
 
-Diff 算法是指在 React 中对比新旧 [Virtual DOM](../VirtualDOM是什么/main.md) 时执行的算法，目标是找出更新变化的范围。
+Diff 算法是指在 React 中对比新旧 [Virtual DOM](../VirtualDOM是什么/main.html) 时执行的算法，目标是找出更新变化的范围。
 
 ## 算法介绍
 

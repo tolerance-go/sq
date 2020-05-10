@@ -13,7 +13,7 @@
 
 浅拷贝时判断属性值是否是对象，如果是对象就进行递归操作，两个一结合就实现了深拷贝。
 
-根据[上篇文章内容](../如何模拟实现一个Object[assign]/main.md)，我们可以写出简单浅拷贝代码如下。
+根据[上篇文章内容](../如何模拟实现一个Object[assign]/main.html)，我们可以写出简单浅拷贝代码如下。
 
 ```ts
 function cloneShallow(source) {
