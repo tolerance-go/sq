@@ -1,5 +1,5 @@
 ---
-order: 998
+order: 8
 hiddenInSidebar: true
 ---
 

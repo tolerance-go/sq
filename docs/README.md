@@ -10,7 +10,7 @@ features:
     details: 约定式路由，全面支持 Markdown，提供流畅的写作体验
   - title: 结构&问题
     details: 将知识以结构化的问题和答案进行整理，帮助理清脉络
-  - title: 合作式编程
+  - title: 合作编辑
     details: 和 Github 全面联动，版本驱动，支持修改与评论功能
 footer: MIT Licensed | Copyright © 2019-present
 feed: false
