@@ -5,9 +5,13 @@ hiddenInSidebar: true
 
 # 工具与运维
 
+## 运维定义
+
 运维，本质上是对网络、服务器、服务的生命周期各个阶段的运营与维护，在成本、稳定性、效率上达成一致可接受的状态。
 
 ## 平台工具
+
+平台工具包括（不限于）：
 
 - Web 服务器：apache、tomcat、nginx、lighttpd
 - 监控：nagios、ganglia、cacti、zabbix
