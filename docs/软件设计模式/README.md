@@ -1,6 +1,7 @@
 ---
 order: 6
 hiddenInSidebar: true
+group: 更多其它
 ---
 
 # 软件设计模式

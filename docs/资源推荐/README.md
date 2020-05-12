@@ -80,6 +80,8 @@ _按添加时间排序_
 - [Feathericons](https://feathericons.com) - 极简 ICON 图标集
 - [html5up](https://html5up.net/) - HTML5 + CSS 3 免费模版
 
-## 其它
+## 开源项目
 
+- [the-super-tiny-compiler](https://github.com/jamiebuilds/the-super-tiny-compiler) - babel 曾经推荐的迷你编译器，非常适合用来学习
+- [store2](https://github.com/nbubna/store) - 扩展了 localStorage 只支持的存储类型
 - [h2o](https://github.com/h2o/h2o) - 优化的 HTTP Server，对 HTTP/2 的支持性做的比较好
