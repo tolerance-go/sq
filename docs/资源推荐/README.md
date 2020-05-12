@@ -60,6 +60,16 @@ _按添加时间排序_
 ## 工具类
 
 - [NetNewsWire](https://ranchero.com/netnewswire/) - RSS 阅读器
+- [Charles - Web 调试代理程序](https://www.charlesproxy.com/)
+
+## Chrome 插件
+
+- [HTTP/2 and SPDY indicator](https://chrome.google.com/webstore/detail/http2-and-spdy-indicator/mpbpobfflnpcgagjijhmgnchggcjblin) - 如果你访问的站点开启了 HTTP/2，图标会亮起，而且点击会进入 chrome 内置的 HTTP/2 监视工具
+
+## 命令行工具
+
+- [nghttp2](https://github.com/nghttp2/nghttp2) - C 语言实现的 HTTP/2，可以用它调试 HTTP/2 请求如果是 Mac，直接 brew install nghttp2 就可以安装，安装好后输入 nghttp -nv https://nghttp2.org 就可以查看 h2 请求
+- [h2i](https://github.com/golang/net/blob/master/http2/h2i/README.md) - 和 nghttp2 类似
 
 ## 资源类
 
@@ -69,3 +79,9 @@ _按添加时间排序_
 - [tableconvert](https://tableconvert.com) - 在线表格编辑器
 - [Feathericons](https://feathericons.com) - 极简 ICON 图标集
 - [html5up](https://html5up.net/) - HTML5 + CSS 3 免费模版
+
+## 开源项目
+
+- [the-super-tiny-compiler](https://github.com/jamiebuilds/the-super-tiny-compiler) - babel 曾经推荐的迷你编译器，非常适合用来学习
+- [store2](https://github.com/nbubna/store) - 扩展了 localStorage 只支持的存储类型
+- [h2o](https://github.com/h2o/h2o) - 优化的 HTTP Server，对 HTTP/2 的支持性做的比较好
