@@ -1,13 +1,13 @@
 ---
 home: true
 heroImage: /tree.png
-heroText: SQ
-tagline: 用结构化的问题建立自己的领域知识体系，不断提高认知水平和解决问题的能力
+heroText: 晓问题
+tagline: 晓问题，不在乎大小，而在乎你知道不知道
 actionText: 开始吧
 actionLink: /前端/
 features:
-  - title: 简洁至上
-    details: 约定式路由，全面支持 Markdown，提供流畅的写作体验
+  - title: 知道所以&解释因为
+    details: 客观描述问题，进一步了解背后原因
   - title: 结构&问题
     details: 将知识以结构化的问题和答案进行整理，帮助理清脉络
   - title: 合作编辑

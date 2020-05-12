@@ -2,9 +2,12 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    max-width: 740px;
-    margin: 0 auto;
     padding: 2rem 0;
+
+    &.page {
+        max-width: 740px;
+        margin: 0 auto;
+    }
 
     .title {
         margin-right: 10px;
@@ -19,8 +22,15 @@
     }
 }
 
-@media (max-width: 959px) {
+.page {
     .contributor-list {
-        padding: 2rem 2rem;
+        max-width: 740px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 959px) {
+        .contributor-list {
+            padding: 2rem 2rem;
+        }
     }
 }

@@ -11,8 +11,8 @@ const HOST =
     : 'http://47.92.70.143';
 
 module.exports = {
-  title: 'SQ',
-  description: 'Build your own knowledge system with structured problems',
+  title: '晓问题',
+  description: '晓问题，不在乎大小，而在乎你知道不知道',
   themeConfig: {
     sidebarDepth: 6,
     repo: 'tolerance-go/sq',
@@ -21,7 +21,7 @@ module.exports = {
     docsDir: 'docs',
     docsBranch: 'master',
     editLinks: true,
-    editLinkText: '邀请前来纠正和完善此内容',
+    editLinkText: '帮助我们纠正和完善此内容',
     nav: require('./nav'),
     sidebar: require('./sidebar'),
   },
@@ -60,6 +60,13 @@ module.exports = {
     '@vuepress/back-to-top',
     '@vuepress/medium-zoom',
     require('./plugins/feed-gen/index.js'),
+    [
+      require('./plugins/live2d/index.js'),
+      {
+        modelName: 'z16',
+        mobileShow: false,
+      },
+    ],
     process.env.VUEPRESS
       ? [
           '@vssue/vuepress-plugin-vssue',

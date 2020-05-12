@@ -146,7 +146,7 @@ module.exports = (options, ctx) => {
 
       const generateFeedConfig = async (allChangedMd, renderedPagePaths) => {
         const feed = new Feed({
-          title: 'SQ',
+          title: '晓问题',
           description:
             '用结构化的问题建立自己的领域知识体系，不断提高认知水平和解决问题的能力',
           id: HOST,
