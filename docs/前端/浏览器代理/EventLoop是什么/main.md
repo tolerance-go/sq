@@ -79,45 +79,7 @@ JavaScript 的代码执行时，主线程会从上到下一步步的执行代码
 
 ### 注意
 
-1. 立即 resolve 的 Promise 对象，是在本轮"事件循环"的结束时执行，而不是在下一轮"事件循环"的开始时
-
-   ```ts
-   new Promise((resolve) => {
-     setTimeout(() => {
-       resolve('hi');
-       Promise.resolve().then(() => console.log('bi'));
-     }, 1000);
-   }).then((a) => {
-     console.log(a);
-   });
-
-   // hi
-   // bi
-   ```
-
-   ```ts
-   new Promise((r) => {
-     console.log(1);
-     r();
-     new Promise((r) => {
-       console.log(2);
-       r();
-       new Promise((r) => {
-         console.log(3);
-         r();
-       }).then(() => console.log(4));
-     }).then(() => console.log(5));
-   }).then(() => console.log(6));
-
-   // 1
-   // 2
-   // 3
-   // 4
-   // 5
-   // 6
-   ```
-
-2. async 函数返回一个 Promise 对象
+1. async 函数返回一个 Promise 对象
 
    当函数执行的时候，一旦遇到 await 就会先返回，等到触发的异步操作完成，再接着执行函数体内后面的语句。
 
@@ -274,6 +236,30 @@ console.log('script end');
 ```
 
 搞清楚这题的打印顺序，基本事件循环就没啥大问题了
+
+再来一道考察执行顺序
+
+```ts
+new Promise((r) => {
+  console.log(1);
+  r();
+  new Promise((r) => {
+    console.log(2);
+    r();
+    new Promise((r) => {
+      console.log(3);
+      r();
+    }).then(() => console.log(4));
+  }).then(() => console.log(5));
+}).then(() => console.log(6));
+
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+```
 
 ## 参考资源
 

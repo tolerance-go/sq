@@ -25,7 +25,12 @@ IntersectionObserver
 
 资源预加载是另一个性能优化技术，我们可以使用该技术来预先告知浏览器某些资源可能在将来会被使用到。通过 DNS 预解析来告诉浏览器未来我们可能从某个特定的 URL 获取资源，当浏览器真正使用到该域中的某个资源时就可以尽快地完成 DNS 解析。例如，我们将来可从 example.com 获取图片或音频资源，那么可以在文档顶部的 标签中加入以下内容：
 
-<link rel="dns-prefetch" href="//example.com">
+```html
+<meta http-equiv="x-dns-prefetch-control" content="on" />
+<link rel="dns-prefetch" href="//www.img.com" />
+<link rel="dns-prefetch" href="//www.api.com" />
+<link rel="dns-prefetch" href="//www.test.com" />
+```
 
 ## 4. SSR 渲染
 

@@ -7,7 +7,7 @@ HMR 的核心就是客户端从服务端拉去更新后的文件，准确的说�
 1. 实际上 `webpack-dev-server` 与浏览器之间维护了一个 Websocket，当本地资源发生变化时，`webpack-dev-server` 会向浏览器推送更新，并带上构建时的 hash，让客户端与上一次资源进行对比。
 2. 客户端对比出差异后会向 `webpack-dev-server` 发起 Ajax 请求来获取更改内容(文件列表、hash)
 3. 这样客户端就可以再借助这些信息继续向 `webpack-dev-server` 发起 jsonp 请求获取该 chunk 的增量更新。
-4. 后续的部分由 HotModulePlugin 来完成，处理增量更，选择状态保留，错误回退，同时提供了相关 API 以供开发者针对自身场景进行处理，像 react-hot-loader 和 vue-loader 都是借助这些 API 实现 HMR。
+4. 后续的部分由 HotModulePlugin 来完成，处理更新状态，选择状态保留，错误回退，同时提供了相关 API 以供开发者针对自身场景进行处理，像 react-hot-loader 和 vue-loader 都是借助这些 API 实现 HMR。
 
 ## 参考资源
 
