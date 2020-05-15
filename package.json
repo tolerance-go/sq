@@ -98,6 +98,7 @@
     "lerna-changelog": "^1.0.1",
     "less": "^3.11.1",
     "lint-staged": "^10.1.0",
+    "mermaid": "^8.5.0",
     "nodemon": "^2.0.3",
     "parcel": "^1.12.4",
     "prettier": "^2.0.4",
@@ -109,6 +110,10 @@
     "vuepress": "^1.4.1"
   },
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "delay": "^4.3.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "recoil": "^0.0.7"
   }
 }

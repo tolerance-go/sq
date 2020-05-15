@@ -28,11 +28,6 @@
         <slot name="page-bottom" />
       </template>
     </Page>
-
-    <div class="qrcode">
-      <img src="/qrcode.jpeg" />
-      <span>邀请加入前端学习群</span>
-    </div>
   </div>
 </template>
 

@@ -26,7 +26,9 @@ yarn generate
 
 参考 vuepress [自定义使用插件](https://vuepress.vuejs.org/zh/plugin/using-a-plugin.html)，大致流程如下：
 
-1. 生产环境下，构建结束后：检测距离到上一个有版本 tag 的 commit（包括），找到之间所有修改的 md 文件
+1. 生产环境下，构建结束后：检测距离到上一个有版本 tag 的 commit（不包括），找到之间所有修改的 md 文件
+
+   如果 head 就是 tag，则跳过，继续寻找上一个 tag 记录
 
 2. 根据修改文件记录，通过调用 github-api 获取所有作者和贡献者信息
 
@@ -47,6 +49,7 @@ README 文件和 main 文件分别代表所容纳的文件夹
 - `feed` 参数控制文件是否被自动生成 Feed 订阅内容，默认为 `true`
   - 文件修改记录只在未发布阶段有效
   - 可以通过 [id 子字段](https://github.com/jpmonette/feed#example) 强制更新
+- `group` 将导航进行分组，eg：`group: '更多其它'`
 
 ## 全局组件
 
@@ -72,6 +75,8 @@ README 文件和 main 文件分别代表所容纳的文件夹
 yarn dev:visual
 ```
 
+访问 `localhost:1234/${文件路径，注意没有 doc}` 就可以直接访问了，对于演示 demo，执行代码都非常方便
+
 ### Service
 
 使用 `Koa`，可以方便生成所需接口，在 `docs` 目录下，新建 `*.service.ts` 文件，执行如下命令
@@ -80,6 +85,8 @@ yarn dev:visual
 yarn dev:server
 yarn dev:server:watch // 同时监听文件自动生成在线 swagger 文档，访问 /api-playground
 ```
+
+生成的接口地址就是 `localhost:3000/${文件路径，注意没有 doc}`
 
 ### Test
 

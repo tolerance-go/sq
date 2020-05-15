@@ -65,4 +65,4 @@ workflows:
             - test
           filters:
             branches:
-              only: never
+              only: master

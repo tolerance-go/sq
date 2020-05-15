@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        background-color: #eee;
+        height: 100vh;
+        width: 100vw;
+      }
+      .block {
+        width: 150px;
+        height: 150px;
+        background-color: blue;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+      }
+      .wrapper {
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .text {
+        color: #eee;
+      }
+    </style>
+  </head>
+  <body class="container">
+    <div class="block"></div>
+    <div class="wrapper">
+      <span class="text">text</span>
+    </div>
+  </body>
+</html>

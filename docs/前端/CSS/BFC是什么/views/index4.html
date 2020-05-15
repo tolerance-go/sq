@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BFC是什么</title>
+    <style>
+      body {
+        background-color: black;
+      }
+      p {
+        margin: 10px 0;
+        background-color: green;
+      }
+      .bfc {
+        overflow: hidden; /* !!! */
+      }
+    </style>
+  </head>
+  <body>
+    <p>text</p>
+    <div class="bfc">
+      <p>text</p>
+      <p>text</p>
+    </div>
+  </body>
+</html>

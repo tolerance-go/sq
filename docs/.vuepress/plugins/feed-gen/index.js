@@ -146,7 +146,7 @@ module.exports = (options, ctx) => {
 
       const generateFeedConfig = async (allChangedMd, renderedPagePaths) => {
         const feed = new Feed({
-          title: 'SQ',
+          title: '晓问题',
           description:
             '用结构化的问题建立自己的领域知识体系，不断提高认知水平和解决问题的能力',
           id: HOST,
@@ -211,7 +211,9 @@ module.exports = (options, ctx) => {
             link: githubAuthor.html_url,
           });
 
-          const [__, title] = content.match(/#\s?(.*)\n?/);
+          const r = content.match(/#\s?(.*)\n?/);
+          if (r == null) throw new Error(`${pathStr} 必须存在一个 title`);
+          const [__, title] = r;
 
           const parsedPath = path.parse(pathStr);
 

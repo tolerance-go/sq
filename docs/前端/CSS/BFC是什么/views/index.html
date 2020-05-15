@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BFC是什么</title>
+    <style>
+      .out {
+        outline: 10px solid red;
+      }
+      .in {
+        background-color: green;
+        height: 100px;
+        width: 100%;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="out">
+      <div class="in"></div>
+    </div>
+  </body>
+</html>

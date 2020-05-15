@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Float</title>
+    <style>
+      div {
+        background-color: green;
+        padding: 50px;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="text">text</div>
+    <script>
+      const text = document.getElementById('text');
+
+      const list = [
+        'none',
+        'block',
+        'inline',
+        'inline-block',
+        'list-item',
+        'run-in',
+        'compact',
+        'marker',
+        'table',
+        'inline-table',
+        'table-row-group',
+        'table-header-group',
+        'table-footer-group',
+        'table-row',
+        'table-column-group',
+        'table-column',
+        'table-cell',
+        'table-caption',
+        'inherit',
+      ];
+
+      list.forEach((item) => {
+        text.style.display = item;
+        console.log(item, '->', window.getComputedStyle(text).display);
+      });
+
+
+    </script>
+  </body>
+</html>

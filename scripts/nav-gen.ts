@@ -79,6 +79,8 @@ interface ParsedTreeNode {
   children: (ParsedTreeNode | string)[];
 }
 
+const navOptions = {};
+
 const parse = (treeNode: TreeNode, level = 0): ParsedTreeNode => {
   const sortFn = (a, b) => {
     // string type or undefined
@@ -93,6 +95,10 @@ const parse = (treeNode: TreeNode, level = 0): ParsedTreeNode => {
     }
     return 0;
   };
+
+  if (level === 1) {
+    navOptions[treeNode.name] = treeNode.options;
+  }
 
   treeNode.children.sort(sortFn);
 
@@ -135,6 +141,7 @@ const parse = (treeNode: TreeNode, level = 0): ParsedTreeNode => {
 };
 
 const generateSidebar = (parsedTree) => {
+  const groups = {};
   const navContent = parsedTree.children
     .map((item) => {
       if (typeof item === 'string') return;
@@ -144,11 +151,14 @@ const generateSidebar = (parsedTree) => {
       };
     })
     .filter(Boolean)
+
     .map((item) => {
-      if (item.text === '晓问题') {
+      const n = '晓问题';
+      if (item.text === n) {
         return {
           ...item,
-          text: '晓问题 🌱',
+          text: `${n}(${totalMap[n]}) 🌱`,
+          _text: item.text,
         };
       }
 
@@ -156,17 +166,60 @@ const generateSidebar = (parsedTree) => {
         return {
           ...item,
           text: `${item.text}(${totalMap[item.text]})`,
+          _text: item.text,
         };
       }
-      return item;
+      return {
+        ...item,
+        _text: item.text
+      };
     })
 
+    .filter((item) => {
+      const options = navOptions[item._text];
+      const groupName = options.group;
+
+      if (groupName) {
+        groups[groupName]
+          ? groups[groupName].items.push(item)
+          : (groups[groupName] = {
+              text: groupName,
+              items: [item],
+            });
+      }
+
+      delete item._text;
+
+      return !groupName;
+    })
+
+    .concat(Object.keys(groups).map((k) => groups[k]))
+
     .concat({
-      text: 'RSS订阅',
+      text: '订阅&互动',
       items: [
-        { text: 'RSS 2.0', link: `${HOST}/rss.xml`, target: '_blank' },
-        { text: 'Atom 1.0', link: `${HOST}/feed.atom`, target: '_blank' },
-        { text: 'JSON Feed 1.0', link: `${HOST}/feed.json`, target: '_blank' },
+        {
+          text: 'RSS订阅',
+          items: [
+            { text: 'RSS 2.0', link: `${HOST}/rss.xml`, target: '_blank' },
+            { text: 'Atom 1.0', link: `${HOST}/feed.atom`, target: '_blank' },
+            {
+              text: 'JSON Feed 1.0',
+              link: `${HOST}/feed.json`,
+              target: '_blank',
+            },
+          ],
+        },
+        {
+          text: '社区交流',
+          items: [
+            {
+              text: '微信交流群',
+              link: `${HOST}/qrcode.jpeg`,
+              target: '_blank',
+            },
+          ],
+        },
       ],
     });
 

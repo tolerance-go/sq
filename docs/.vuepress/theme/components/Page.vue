@@ -28,45 +28,45 @@ export default {
     return {};
   },
   updated() {
-    if (prePage !== this.$page.relativePath) {
-      if (this.isQaPage) {
-        if (document && document.getElementsByClassName) {
-          const content = document.getElementsByClassName(
-            'content__default',
-          )[0];
+    // if (prePage !== this.$page.relativePath) {
+    //   if (this.isQaPage) {
+    //     if (document && document.getElementsByClassName) {
+    //       const content = document.getElementsByClassName(
+    //         'content__default',
+    //       )[0];
 
-          if (content) {
-            content.classList.remove('qa-page');
-            content.classList.add('qa-page');
+    //       if (content) {
+    //         content.classList.remove('qa-page');
+    //         content.classList.add('qa-page');
 
-            Array.from(
-              content.querySelectorAll(
-                '.content__default > p, .content__default > ul > li, .content__default > ol > li, .content__default > div > pre',
-              ),
-            ).filter(node => {
-              return !(node.tagName.toLowerCase() === 'li' 
-              && node.parentElement 
-              && node.parentElement.previousElementSibling 
-              && node.parentElement.previousElementSibling.id === '参考资源')
-            }).forEach((node) => {
-              node.classList.remove('qa', 'hidden');
-              node.classList.add('qa', 'hidden');
-              node.onclick = () => {
-                node.classList.toggle('hidden');
-              };
-            });
-          }
-        }
-      }
+    //         Array.from(
+    //           content.querySelectorAll(
+    //             '.content__default > p, .content__default > ul > li, .content__default > ol > li, .content__default > div > pre',
+    //           ),
+    //         ).filter(node => {
+    //           return !(node.tagName.toLowerCase() === 'li' 
+    //           && node.parentElement 
+    //           && node.parentElement.previousElementSibling 
+    //           && node.parentElement.previousElementSibling.id === '参考资源' 
+    //           || node.textContent === '点击显示隐藏内容')
+    //         }).forEach((node) => {
+    //           node.classList.remove('qa', 'hidden');
+    //           node.classList.add('qa', 'hidden');
+    //           node.onclick = () => {
+    //             node.classList.toggle('hidden');
+    //           };
+    //         });
+    //       }
+    //     }
+    //   }
 
-      prePage = this.$page.relativePath;
-    }
+    //   prePage = this.$page.relativePath;
+    // }
   },
   computed: {
     isQaPage() {
       return (
-        this.$page.relativePath.startsWith('晓问题') &&
-        this.$page.relativePath.endsWith('main.md')
+        this.$page.relativePath.startsWith('晓问题') 
       );
     },
   },
