@@ -141,7 +141,6 @@ const parse = (treeNode: TreeNode, level = 0): ParsedTreeNode => {
 };
 
 const generateSidebar = (parsedTree) => {
-  console.log(navOptions);
   const groups = {};
   const navContent = parsedTree.children
     .map((item) => {

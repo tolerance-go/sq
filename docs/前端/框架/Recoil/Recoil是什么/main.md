@@ -2,6 +2,8 @@
 
 个人理解 Recoil 为 React 的外部状态管理提供了一种分布式+函数式的新的解决方案
 
+selector 就是计算属性嘛，loadable 嘛还记得 [dva-loading](https://github.com/dvajs/dva/tree/master/packages/dva-loading) 嘛～
+
 ## 动机
 
 出于兼容性和简便性的考虑，最好使用 React 的内置状态管理功能，而不要使用外部全局状态。但是 React 有一定的局限性：
