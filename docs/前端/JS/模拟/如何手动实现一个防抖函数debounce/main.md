@@ -44,38 +44,11 @@ document.addEventListener('scroll', betterFn);
 
 上述实现方案已经可以解决大部分使用场景了，不过想要实现第一次触发回调事件就执行 fn 有点力不从心了，这时候我们来改写下 debounce 函数，加上第一次触发立即执行的功能。
 
-```ts
-// 实现 2
-// immediate 表示第一次是否立即执行
-function debounce(fn, wait = 50, immediate) {
-  let timer = null;
-  let first = true;
-  return function (...args) {
-    if (timer) clearTimeout(timer);
-
-    // ------ 新增部分 start ------
-    // immediate 为 true 表示第一次触发后执行
-    // timer 为空表示首次触发
-    if (immediate && first) {
-      fn.apply(this, args);
-      first = false;
-      return;
-    }
-    // ------ 新增部分 end ------
-
-    timer = setTimeout(() => {
-      fn.apply(this, args);
-      timer = null;
-    }, wait);
-  };
-}
-
-// DEMO
-// 执行 debounce 函数返回新函数
-const betterFn = debounce(() => console.log('fn 防抖执行了'), 1000, true);
-
-// 第一次触发 scroll 执行一次 fn，后续只有在停止滑动 1 秒后才执行函数 fn
-document.addEventListener('scroll', betterFn);
-```
+<!-- prettier-ignore -->
+<<< @/docs/前端/JS/模拟/如何手动实现一个防抖函数debounce/tes/debounce.js
 
 实现原理比较简单，判断传入的 immediate 是否为 true，另外需要额外判断是否是第一次执行防抖函数。
+
+## 参考资源
+
+- [深入浅出防抖函数 debounce](https://muyiy.cn/blog/7/7.2.html)
