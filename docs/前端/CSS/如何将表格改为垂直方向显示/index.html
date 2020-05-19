@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS - 如何将表格改为垂直方向显示</title>
+    <style>
+      #table {
+        transform: rotate(90deg);
+      }
+      #table th,
+      #table td {
+        transform: rotate(-90deg);
+      }
+      td {
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="table">
+      <tbody>
+        <tr>
+          <th>row1</th>
+          <td>aaaa</td>
+        </tr>
+        <tr>
+          <th>row2</th>
+          <td>bbbb</td>
+          <td>bbbb</td>
+          <td>bbbb</td>
+        </tr>
+        <tr>
+          <th>row3</th>
+          <td>bbbb</td>
+          <td>bbbb</td>
+          <td>bbbb</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,5 +1,5 @@
-import twoSum from './index';
+import fn from './index';
 
-test('twoSum([2, 7, 11, 15], 9)', () => {
-  expect(twoSum([2, 7, 11, 15], 9)).toStrictEqual([0, 1]);
+test('1-两数之和', () => {
+  expect(fn([2, 7, 11, 15], 9)).toStrictEqual([0, 1]);
 });

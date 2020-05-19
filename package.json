@@ -77,7 +77,7 @@
     "@vssue/vuepress-plugin-vssue": "^1.4.3",
     "@vuepress/plugin-back-to-top": "^1.4.1",
     "@vuepress/plugin-medium-zoom": "^1.4.1",
-    "babel-jest": "^25.3.0",
+    "babel-jest": "^26.0.1",
     "babel-loader": "^8.1.0",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
