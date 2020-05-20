@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML - Web-Workers使用方式是什么-</title>
+  </head>
+  <body>
+    <!--主线程，HTML文件的body标签中-->
+    <div>
+      Worker 输出内容：<span id="app"></span>
+      <input type="text" title="" id="msg" />
+      <button onclick="sendMessage()">发送</button>
+      <button onclick="stopWorker()">stop!</button>
+    </div>
+    <script type="text/javascript">
+      if (typeof Worker === 'undefined')
+        // 使用Worker前检查一下浏览器是否支持
+        document.writeln(' Sorry! No Web Worker support.. ');
+      else {
+        window.w = new Worker('workerThread1.js');
+        window.w.onmessage = (ev) => {
+          document.getElementById('app').innerHTML = ev.data;
+        };
+        window.w.onerror = (err) => {
+          w.terminate();
+          console.log(error.filename, error.lineno, error.message); // 发生错误的文件名、行号、错误内容
+        };
+        function sendMessage() {
+          const msg = document.getElementById('msg');
+          window.w.postMessage(msg.value);
+        }
+        function stopWorker() {
+          window.w.terminate();
+        }
+      }
+    </script>
+  </body>
+</html>

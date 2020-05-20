@@ -260,6 +260,8 @@ bar(3); // a:2，b:3
 
    如果给默认绑定指定一个全局对象和 undefined 以外的值，我们就可以用来区分默认绑定和隐式绑定与显示绑定
 
+   也就是只在默认绑定下作用 bind 传入的上下文，如果是隐式绑定或者显示绑定则优先使用语言预设的上下文
+
    ```ts
    if (!Function.prototype.softBind) {
      Function.prototype.softBind = function (obj) {
@@ -309,7 +311,7 @@ bar(3); // a:2，b:3
 
 - 包括内置对象函数（比如 Number(..)）在内的所有函数都可以用 new 来调用，这种函数调用被称为构造函数调用。
 
-- 实际上并不存在所谓的“构造函数”，只有对于函数的“构造调用”。
+- **实际上并不存在所谓的“构造函数”，只有对于函数的“构造调用”。**
 
 使用 new 来调用函数，或者说发生构造函数调用时，会自动执行下面的操作。
 
@@ -403,6 +405,4 @@ foo.call(obj); // 2
 
 ## 参考资源
 
-- [JavaScript深入之史上最全--5种this绑定全面解析](https://muyiy.cn/blog/3/3.1.html)
-
-
+- [JavaScript 深入之史上最全--5 种 this 绑定全面解析](https://muyiy.cn/blog/3/3.1.html)
