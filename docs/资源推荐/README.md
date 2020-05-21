@@ -79,6 +79,7 @@ _按添加时间排序_
 - [tableconvert](https://tableconvert.com) - 在线表格编辑器
 - [Feathericons](https://feathericons.com) - 极简 ICON 图标集
 - [html5up](https://html5up.net/) - HTML5 + CSS 3 免费模版
+- [图之典](http://tuzhidian.com/)
 
 ## 开源项目
 
