@@ -98,7 +98,7 @@
     "lerna-changelog": "^1.0.1",
     "less": "^3.11.1",
     "lint-staged": "^10.1.0",
-    "mermaid": "^8.5.0",
+    "mermaid": "^9.1.2",
     "nodemon": "^2.0.3",
     "parcel": "^1.12.4",
     "prettier": "^2.0.4",
